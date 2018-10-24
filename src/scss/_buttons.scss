@@ -1,0 +1,20 @@
+.button,
+button,
+input[type='button'],
+input[type='reset'],
+input[type='submit'] {
+	background-color: $color-primary;
+	border: .1rem solid $color-primary;
+	border-radius: $border-radius;
+	color: $color-initial;
+	cursor: pointer;
+	display: inline-block;
+	font-weight: 700;
+	letter-spacing: .1rem;
+	line-height: $baseLineHeight;
+	padding: 0.6rem 1rem;
+	text-align: center;
+	text-decoration: none;
+	text-transform: uppercase;
+	white-space: nowrap;
+}
