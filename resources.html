@@ -77,6 +77,7 @@
           }
         },
         spreadsheet: [],
+        cacheLifttime: 10000, //hours*60*60*1000
       },
 
       created: function () {
@@ -114,7 +115,7 @@
         },
         getCache: function ( id, index ) {
           var identity = id + index;
-          if ( window.localStorage.getItem( identity ) ) {
+          if ( window.localStorage.getItem( identity ) && this.cacheIsFresh() ) {
             this.putData( window.localStorage.getItem( identity ), index )
             console.log('data loaded from cache');
             return true;
@@ -122,6 +123,22 @@
 
           return false;
 
+        },
+        cacheIsFresh: function () {
+          var now = new Date().getTime();
+          var setupTime = localStorage.getItem('setupTime');
+          if (setupTime == null) {
+              localStorage.setItem('setupTime', now);
+              return false; // cache is NOT fresh
+          } else {
+              if(now - setupTime > this.cacheLifttime) {
+                  localStorage.clear()
+                  localStorage.setItem('setupTime', now);
+                  console.log('cache reset');
+                  return false; // cache is NOT fresh
+              }
+              return true; // cache is fresh
+          }
         },
         iconSrc: function ( url ) {
           return 'https://plus.google.com/_/favicon?domain=' + url;
