@@ -11,9 +11,15 @@
   </head>
   <body>
 
+    <h1>Resources</h1>
+    <p>
+      Check out these <a href="#website">website</a> and <a href="#book">book</a> recommendations from other freelancers.
+      <br>
+      <small><em>* Some of the websites and books use affiliate links to help raise money, you can support this project by clicking the links!</em></small>
+    </p>
     <div id="main">
       <div class="resources">
-        <h2>Books</h2>
+        <h2 id="books">Books</h2>
         <div class="books" v-if="books">
           <div class="book" v-for="book in books" :href="book.link">
             <a :href="book.link" class="cover">
@@ -29,7 +35,7 @@
             </p>
           </div>
         </div>
-        <h2>Websites</h2>
+        <h2 id="websites">Websites</h2>
         <ul class="websites" v-if="websites">
           <li class="site" v-for="website in websites" v-bind:style="{ listStyleImage: 'url(' + website.icon + ')' }">
             <p>
@@ -142,6 +148,8 @@
           if ( ! link ) return null;
 
           var id = 'drewinganddoi-20';
+          if ( link.lastIndexOf('?') > 0) link = link.substring(0, link.lastIndexOf('?'));
+          if ( link.lastIndexOf('/') > 0) link = link.substring(0, link.lastIndexOf('/'));
           link = this.stripSlash( link );
           return link + '/?tag=' + id;
         },

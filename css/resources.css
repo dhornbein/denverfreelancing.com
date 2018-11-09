@@ -462,7 +462,8 @@ input[type='submit'] {
 .books {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-gap: 1em 1.5em; }
+  grid-gap: 1em 1.5em;
+  margin-top: 1.5rem; }
   @media screen and (max-width: 750px) {
     .websites,
     .books {
@@ -487,7 +488,8 @@ input[type='submit'] {
   float: left;
   margin: 0 .5em 0 0; }
   .book .cover img {
-    width: 100%; }
+    width: 100%;
+    box-shadow: 1px 1px 0 #eee, 3px 3px 0 #eee, 4px 4px 0 #CCC; }
 .book p {
   margin-top: 0; }
 

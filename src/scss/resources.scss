@@ -9,6 +9,7 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: 1em 1.5em;
+  margin-top: $leading;
   @media screen and (max-width: $break-small) {
     grid-template-columns: auto;
   }
@@ -41,6 +42,7 @@
     margin: 0 .5em 0 0;
     img {
       width: 100%;
+      box-shadow: 1px 1px 0 #eee, 3px 3px 0 #eee, 4px 4px 0 #CCC;
     }
   }
   p {
