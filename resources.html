@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.rawgit.com/jgthms/minireset.css/master/minireset.css">
+    <title>Resources: Denver Freelancers</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico"/>
+    <link rel="stylesheet" href="css/style.css">
+    <style media="screen">
+      .websites {
+        font-size: 0.8em;
+      }
+      .websites p:first-child {
+        margin-top: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <img src="http://images.amazon.com/images/P/0143129252.01.MZZZZZZZ.jpg" alt="">
+    <img src="http://images.amazon.com/images/P/B00DMCJOXW.01.MZZZZZZZ.jpg" alt="">
+    <img src="http://images.amazon.com/images/P/1848549253.01.MZZZZZZZ.jpg" alt="">
+    <img src="http://images.amazon.com/images/P/1455586676.01.MZZZZZZZ.jpg" alt="">
+
+    <img src="https://plus.google.com/_/favicon?domain=https://coloradocreativeindustries.org/opportunity-type/grants/" alt="">
+
+    <div id="main">
+      <ul class="websites" v-if="websites">
+        <li class="site" v-for="website in websites" v-bind:style="{ listStyleImage: 'url(' + website.icon + ')' }">
+          <p>
+            <a :href="website.link" target="_blank">{{ stripHTTP( website.link ) }}</a>
+            <br>
+            {{ website.description }}
+          </p>
+        </li>
+        <!-- <div v-for="foobar in websites"> {{ foobar.icon }}</div> -->
+      </ul>
+    </div>
+
+    <script>
+
+    "use strict"
+
+    Vue.component("day", {
+      props: ["moon"],
+      template: `
+
+      `,
+      data: function () {
+        return {
+          isSelected: false
+        }
+      },
+      methods: {
+      }
+    });
+
+    var app = new Vue({
+      el: "#main",
+      data: {
+        workbook: {
+          id: "123dFQ4bZVXNtrmD23_xZCVNJd1_MAvdVY_yISiJcBYY",
+          sheets: 2,
+        },
+        spreadsheet: [],
+      },
+
+      created: function () {
+        this.getData();
+      },
+
+      methods: {
+        getData: function () {
+          for (var i = 1; i <= this.workbook.sheets; i++) {
+            if ( ! this.getCache( this.workbook.id, i )) {
+              this.fetchData( this.workbook.id, i );
+            }
+          }
+        },
+        fetchData: function ( id, index ) {
+          var xhr = new XMLHttpRequest(),
+              self = this,
+              url = 'https://spreadsheets.google.com/feeds/list/' + id +  '/' + index + '/public/values?alt=json';
+          xhr.open('GET', url )
+          xhr.onload = function() {
+            self.putData( xhr.responseText, index );
+            self.putCache( xhr.responseText, id, index );
+            console.log('data loaded');
+          }
+          xhr.send(null)
+        },
+        putData: function ( data, index) {
+          this.spreadsheet[index] = JSON.parse( data );
+        },
+        putCache: function ( data, id, index ) {
+          var identity = id + index;
+          window.localStorage.setItem( identity , data );
+          console.log('data cached');
+        },
+        getCache: function ( id, index ) {
+          var identity = id + index;
+          if ( window.localStorage.getItem( identity ) ) {
+            this.putData( window.localStorage.getItem( identity ), index )
+            console.log('data loaded from cache');
+            return true;
+          }
+
+          return false;
+
+        },
+        iconSrc: function ( url ) {
+          return 'https://plus.google.com/_/favicon?domain=' + url;
+        },
+        stripHTTP: function ( url ) {
+          var regex = new RegExp('(https?://(?:www.)?)','gi');
+          return url.replace( regex, '' )
+        },
+        amazonASIN: function ( link ) {
+          var rx = new RegExp('(?:[/dp/]|$)([A-Z0-9]{10})','g');
+          // var rx = new RegExp('http://www.amazon.com/([\\w-]+/)?(dp|gp/product)/(\\w+/)?(\\w{10})','g');
+          var arr = rx.exec( link );
+          return arr[1];
+        },
+        amazonAffiliateLink: function ( link ) {
+          var id = 'drewinganddoi-20';
+          link = link.replace(/\/$/, "");
+          return link + '/' + id;
+        },
+        amazonImageSrc: function ( link ) {
+          return 'http://images.amazon.com/images/P/' + this.amazonASIN( link ) + '.01.MZZZZZZZ.jpg';
+        },
+        gsxRowObject: function ( index, action ) {
+          if ( this.spreadsheet[index] === undefined ) return false;
+          var out = [];
+          var data = this.spreadsheet[index];
+          var rows = data.feed.entry;
+
+          for (var i = 0; i < rows.length; i++) {
+            out.push( action( rows ));
+          }
+
+          return out;
+        },
+      },
+
+      watch: {
+      },
+
+      computed: {
+        websites: function () {
+          var index = 1; // the sheet number of the websites
+          if ( this.spreadsheet[index] === undefined ) return false;
+          var out = [];
+          var data = this.spreadsheet[index];
+          var rows = data.feed.entry;
+
+          for (var i = 0; i < rows.length; i++) {
+            out.push({
+              link: rows[i].gsx$link.$t,
+              description: rows[i].gsx$description.$t,
+              icon: this.iconSrc( rows[i].gsx$link.$t )
+            });
+          }
+
+          return out;
+        },
+        books : function () {
+          var index = 2; // the sheet number of the websites
+          if ( this.spreadsheet[index] === undefined ) return false;
+          var out = [];
+          var data = this.spreadsheet[index];
+          var rows = data.feed.entry;
+
+          for (var i = 0; i < rows.length; i++) {
+            var link = rows[i].gsx$amazonlink.$t;
+            out.push({
+              amazonURL: amazonAffiliateLink( rows[i].gsx$amazonlink.$t ),
+              amazonURL: amazonImageSrc( rows[i].gsx$amazonlink.$t ),
+            });
+          }
+
+          return out;
+        }
+      },
+    });
+
+
+    </script>
+  </body>
+</html>
