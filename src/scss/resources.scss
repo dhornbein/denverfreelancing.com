@@ -3,12 +3,13 @@
 @import "typebase";
 @import "base";
 @import "buttons";
+@import "forms";
 
 .websites,
 .books {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-gap: 1em 1.5em;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-gap: $leading;
   margin-top: $leading;
   @media screen and (max-width: $break-small) {
     grid-template-columns: auto;
