@@ -17,7 +17,7 @@
         <div class="books" v-if="books">
           <div class="book" v-for="book in books" :href="book.link">
             <a :href="book.link" class="cover">
-              <img :src="book.cover" :alt="book.title">
+              <img :src="book.cover" :alt="book.title" v-if="book.cover">
             </a>
             <p>
               <strong>{{ book.title }}</strong>
@@ -25,7 +25,7 @@
             <p class="desc">
               {{ book.description }}
               <br>
-              <a :href="book.link">Buy on Amazon</a>
+              <a :href="book.link" v-if="book.link">Buy on Amazon</a>
             </p>
           </div>
         </div>
