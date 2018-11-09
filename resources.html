@@ -33,7 +33,7 @@
         <ul class="websites" v-if="websites">
           <li class="site" v-for="website in websites" v-bind:style="{ listStyleImage: 'url(' + website.icon + ')' }">
             <p>
-              <a :href="website.link" target="_blank">{{ prettyLink( website.link ) }}</a>
+              <a :href="(website.referralLink) ? website.referralLink : website.link" target="_blank">{{ prettyLink( website.link ) }}</a>
               <br>
               {{ website.description }}
             </p>
@@ -182,6 +182,7 @@
           return this.gsxRowObject( this.workbook.sheets.websites , function (r,self) {
               return { //@TODO autmatically return
                 link: self.gsxGetCol( r, 'link'),
+                referralLink: self.gsxGetCol( r, 'referrallink'),
                 description: self.gsxGetCol( r, 'description'),
                 icon: self.iconSrc( self.gsxGetCol( r, 'link') )
               }
