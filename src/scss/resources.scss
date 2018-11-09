@@ -4,10 +4,46 @@
 @import "base";
 @import "buttons";
 
+.websites,
+.books {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 1em 1.5em;
+  @media screen and (max-width: $break-small) {
+    grid-template-columns: auto;
+  }
+}
+
+.websites {
+  padding-left: 1.5em;
+  @media screen and (max-width: $break-small) {
+    padding-left: .5em;
+  }
+}
+
 .site {
   font-size: 0.8em;
 
+  a {
+    font-family: $font-mono;
+    font-size: 1.25em;
+    word-break: break-all;
+  }
+
   p:first-child {
+    margin-top: 0;
+  }
+}
+
+.book {
+  .cover {
+    float: left;
+    margin: 0 .5em 0 0;
+    img {
+      width: 100%;
+    }
+  }
+  p {
     margin-top: 0;
   }
 }

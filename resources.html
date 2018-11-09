@@ -13,16 +13,23 @@
 
     <div id="main">
       <div class="resources">
+        <h2>Books</h2>
         <div class="books" v-if="books">
-          <a class="book" v-for="book in books" :href="book.link">
-            <img :src="book.cover" :alt="book.title">
+          <div class="book" v-for="book in books" :href="book.link">
+            <a :href="book.link" class="cover">
+              <img :src="book.cover" :alt="book.title">
+            </a>
             <p>
               <strong>{{ book.title }}</strong>
-              <br>
-              {{ book.description }}
             </p>
-          </a>
+            <p class="desc">
+              {{ book.description }}
+              <br>
+              <a :href="book.link">Buy on Amazon</a>
+            </p>
+          </div>
         </div>
+        <h2>Websites</h2>
         <ul class="websites" v-if="websites">
           <li class="site" v-for="website in websites" v-bind:style="{ listStyleImage: 'url(' + website.icon + ')' }">
             <p>

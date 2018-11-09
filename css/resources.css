@@ -458,9 +458,37 @@ input[type='submit'] {
   text-transform: uppercase;
   white-space: nowrap; }
 
+.websites,
+.books {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 1em 1.5em; }
+  @media screen and (max-width: 750px) {
+    .websites,
+    .books {
+      grid-template-columns: auto; } }
+
+.websites {
+  padding-left: 1.5em; }
+  @media screen and (max-width: 750px) {
+    .websites {
+      padding-left: .5em; } }
+
 .site {
   font-size: 0.8em; }
+  .site a {
+    font-family: monospace;
+    font-size: 1.25em;
+    word-break: break-all; }
   .site p:first-child {
     margin-top: 0; }
+
+.book .cover {
+  float: left;
+  margin: 0 .5em 0 0; }
+  .book .cover img {
+    width: 100%; }
+.book p {
+  margin-top: 0; }
 
 /*# sourceMappingURL=resources.css.map */
