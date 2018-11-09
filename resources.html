@@ -18,24 +18,29 @@
     </style>
   </head>
   <body>
-    <img src="http://images.amazon.com/images/P/0143129252.01.MZZZZZZZ.jpg" alt="">
-    <img src="http://images.amazon.com/images/P/B00DMCJOXW.01.MZZZZZZZ.jpg" alt="">
-    <img src="http://images.amazon.com/images/P/1848549253.01.MZZZZZZZ.jpg" alt="">
-    <img src="http://images.amazon.com/images/P/1455586676.01.MZZZZZZZ.jpg" alt="">
-
-    <img src="https://plus.google.com/_/favicon?domain=https://coloradocreativeindustries.org/opportunity-type/grants/" alt="">
 
     <div id="main">
-      <ul class="websites" v-if="websites">
-        <li class="site" v-for="website in websites" v-bind:style="{ listStyleImage: 'url(' + website.icon + ')' }">
-          <p>
-            <a :href="website.link" target="_blank">{{ stripHTTP( website.link ) }}</a>
-            <br>
-            {{ website.description }}
-          </p>
-        </li>
-        <!-- <div v-for="foobar in websites"> {{ foobar.icon }}</div> -->
-      </ul>
+      <div class="resources">
+        <div class="books" v-if="books">
+          <a class="book" v-for="book in books" :href="book.link">
+            <img :src="book.cover" :alt="book.title">
+            <p>
+              <strong>{{ book.title }}</strong>
+              <br>
+              {{ book.description }}
+            </p>
+          </a>
+        </div>
+        <ul class="websites" v-if="websites">
+          <li class="site" v-for="website in websites" v-bind:style="{ listStyleImage: 'url(' + website.icon + ')' }">
+            <p>
+              <a :href="website.link" target="_blank">{{ prettyLink( website.link ) }}</a>
+              <br>
+              {{ website.description }}
+            </p>
+          </li>
+        </ul>
+      </div>
     </div>
 
     <script>
@@ -61,7 +66,10 @@
       data: {
         workbook: {
           id: "123dFQ4bZVXNtrmD23_xZCVNJd1_MAvdVY_yISiJcBYY",
-          sheets: 2,
+          sheets: {
+            websites: 1,
+            books: 2
+          }
         },
         spreadsheet: [],
       },
@@ -72,9 +80,10 @@
 
       methods: {
         getData: function () {
-          for (var i = 1; i <= this.workbook.sheets; i++) {
-            if ( ! this.getCache( this.workbook.id, i )) {
-              this.fetchData( this.workbook.id, i );
+          for ( var i in this.workbook.sheets ) {
+            var index = this.workbook.sheets[i];
+            if ( ! this.getCache( this.workbook.id, index )) {
+              this.fetchData( this.workbook.id, index );
             }
           }
         },
@@ -116,32 +125,54 @@
           var regex = new RegExp('(https?://(?:www.)?)','gi');
           return url.replace( regex, '' )
         },
+        stripSlash: function ( str ) {
+          return str.replace(/\/$/, "");
+        },
+        prettyLink: function ( url ) {
+          return this.stripSlash( this.stripHTTP( url ) );
+        },
         amazonASIN: function ( link ) {
+          if ( ! link ) return null;
+
           var rx = new RegExp('(?:[/dp/]|$)([A-Z0-9]{10})','g');
           // var rx = new RegExp('http://www.amazon.com/([\\w-]+/)?(dp|gp/product)/(\\w+/)?(\\w{10})','g');
           var arr = rx.exec( link );
           return arr[1];
         },
         amazonAffiliateLink: function ( link ) {
+          if ( ! link ) return null;
+
           var id = 'drewinganddoi-20';
-          link = link.replace(/\/$/, "");
-          return link + '/' + id;
+          link = this.stripSlash( link );
+          return link + '/?tag=' + id;
         },
         amazonImageSrc: function ( link ) {
-          return 'http://images.amazon.com/images/P/' + this.amazonASIN( link ) + '.01.MZZZZZZZ.jpg';
+          if ( ! link ) return null;
+
+          var size = [
+          'THUMBZZZ',
+          'MZZZZZZZ',
+          'LZZZZZZZ'
+          ];
+
+          return 'http://images.amazon.com/images/P/' + this.amazonASIN( link ) + '.01.' + size[1] + '.jpg';
         },
         gsxRowObject: function ( index, action ) {
           if ( this.spreadsheet[index] === undefined ) return false;
-          var out = [];
-          var data = this.spreadsheet[index];
-          var rows = data.feed.entry;
+          var out  = [],
+              rows = this.spreadsheet[index].feed.entry,
+              self = this;
 
           for (var i = 0; i < rows.length; i++) {
-            out.push( action( rows ));
+            out.push( action( rows[i], self ));
           }
 
           return out;
         },
+        gsxGetCol: function ( row, col ) {
+          var cell = row['gsx$' + col];
+          return ( cell && cell.$t ) ? cell.$t : null ;
+        }
       },
 
       watch: {
@@ -149,38 +180,24 @@
 
       computed: {
         websites: function () {
-          var index = 1; // the sheet number of the websites
-          if ( this.spreadsheet[index] === undefined ) return false;
-          var out = [];
-          var data = this.spreadsheet[index];
-          var rows = data.feed.entry;
-
-          for (var i = 0; i < rows.length; i++) {
-            out.push({
-              link: rows[i].gsx$link.$t,
-              description: rows[i].gsx$description.$t,
-              icon: this.iconSrc( rows[i].gsx$link.$t )
+          return this.gsxRowObject( this.workbook.sheets.websites , function (r,self) {
+              return { //@TODO autmatically return
+                link: self.gsxGetCol( r, 'link'),
+                description: self.gsxGetCol( r, 'description'),
+                icon: self.iconSrc( self.gsxGetCol( r, 'link') )
+              }
             });
-          }
-
-          return out;
         },
         books : function () {
-          var index = 2; // the sheet number of the websites
-          if ( this.spreadsheet[index] === undefined ) return false;
-          var out = [];
-          var data = this.spreadsheet[index];
-          var rows = data.feed.entry;
-
-          for (var i = 0; i < rows.length; i++) {
-            var link = rows[i].gsx$amazonlink.$t;
-            out.push({
-              amazonURL: amazonAffiliateLink( rows[i].gsx$amazonlink.$t ),
-              amazonURL: amazonImageSrc( rows[i].gsx$amazonlink.$t ),
-            });
-          }
-
-          return out;
+          return this.gsxRowObject( this.workbook.sheets.books , function (r,self) {
+            var link = self.gsxGetCol( r, 'amazonlink' );
+            return { //@TODO autmatically return
+              link: self.amazonAffiliateLink( link ),
+              cover: self.amazonImageSrc( link ),
+              title: self.gsxGetCol( r, 'title' ),
+              description: self.gsxGetCol( r, 'description' )
+            }
+          });
         }
       },
     });
