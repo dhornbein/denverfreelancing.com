@@ -49,6 +49,9 @@ blockquote {
     margin-top: $leading;
     margin-bottom: $leading;
 }
+small {
+  font-size: $scale / 2 * 1rem
+}
 /* Headings */
 
 h1,

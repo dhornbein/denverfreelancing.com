@@ -337,6 +337,9 @@ blockquote {
   margin-top: 1.5rem;
   margin-bottom: 1.5rem; }
 
+small {
+  font-size: 0.707rem; }
+
 /* Headings */
 h1,
 h2,

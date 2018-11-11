@@ -100,7 +100,7 @@ samp {
 /**
  * Add the correct font size in all browsers.
  */
-small {
+small, .note {
   font-size: 80%; }
 
 /**
@@ -337,6 +337,9 @@ blockquote {
   margin-top: 1.5rem;
   margin-bottom: 1.5rem; }
 
+small, .note {
+  font-size: 0.707rem; }
+
 /* Headings */
 h1,
 h2,
@@ -556,6 +559,21 @@ li > label,
   @media screen and (max-width: 900px) {
     .form-body {
       display: block; } }
+
+.callout {
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  display: flex;
+  padding-bottom: 1.5rem;
+  margin-top: 1.5rem; }
+  @media screen and (max-width: 750px) {
+    .callout {
+      flex-direction: column; } }
+
+.note {
+  font-style: italic;
+  line-height: 1.5;
+  opacity: 0.7; }
 
 .websites,
 .books {

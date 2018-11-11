@@ -14,8 +14,9 @@
     <h1>Resources</h1>
     <p>
       Check out these <a href="#website">website</a> and <a href="#book">book</a> recommendations from other freelancers.
-      <br>
-      <small><em>* Some of the websites and books use affiliate links to help raise money, you can support this project by clicking the links!</em></small>
+    </p>
+    <p class="hug note">
+      * Some of the websites and books use affiliate links to help raise money, you can support this project by clicking the links! Also, content on this page is publically editable, if you see something amiss please <a href="mailto:hello@denverfreelancing.com">email us</a>
     </p>
     <div id="main">
       <div class="resources">
@@ -36,6 +37,16 @@
           </div>
         </div>
         <p v-else>Loadings...</p>
+
+        <div class="callout">
+          <p>
+            <strong>Got more resources?</strong>
+            Resources on this page come from a public Google Spreadsheet, feel free to add or edit!
+          </p>
+          <p>
+            <a :href="workbookEditURL" class="button">View Spreadsheet</a>
+          </p>
+        </div>
 
         <h2 id="websites">Websites</h2>
         <ul class="websites" v-if="websites">
@@ -149,20 +160,6 @@
 
     "use strict"
 
-    Vue.component("day", {
-      props: ["moon"],
-      template: `
-
-      `,
-      data: function () {
-        return {
-          isSelected: false
-        }
-      },
-      methods: {
-      }
-    });
-
     var app = new Vue({
       el: "#main",
       data: {
@@ -174,7 +171,7 @@
           }
         },
         spreadsheet: [],
-        cacheLifttime: 10000, //hours*60*60*1000
+        cacheLifttime: 1*60*60*1000, //hours*60*60*1000
       },
 
       created: function () {
@@ -300,6 +297,9 @@
       },
 
       computed: {
+        workbookEditURL: function () {
+          return 'https://docs.google.com/spreadsheets/d/' + this.workbook.id + '/edit';
+        },
         websites: function () {
           return this.gsxRowObject( this.workbook.sheets.websites , function (r,self) {
               return { //@TODO autmatically return
