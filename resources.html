@@ -52,9 +52,9 @@
         <ul class="websites" v-if="websites">
           <li class="site" v-for="website in websites" v-bind:style="{ listStyleImage: 'url(' + website.icon + ')' }">
             <p>
-              <a :href="(website.referralLink) ? website.referralLink : website.link" target="_blank">{{ prettyLink( website.link ) }}</a>
+              <a :href="website.link" target="_blank">{{ prettyLink( website.link ) }}</a>
               <br>
-              {{ website.description }}
+              {{ website.description }} <small v-if="website.referralLink">[<a :href="website.referralLink">Referral Link</a>]</small>
             </p>
           </li>
         </ul>
