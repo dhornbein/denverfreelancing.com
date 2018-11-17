@@ -30,7 +30,7 @@
     </p>
     <div id="main">
       <div class="resources">
-        <h2 id="books">Books</h2>
+        <h2 id="books">📖 Books</h2>
         <div class="books" v-if="books">
           <div class="book" v-for="book in books" :href="book.link">
             <a :href="book.link" class="cover">
@@ -58,17 +58,56 @@
           </p>
         </div>
 
-        <h2 id="websites">Websites</h2>
+        <h2 id="websites">💻 Websites</h2>
         <ul class="websites" v-if="websites">
           <li class="site" v-for="website in websites" v-bind:style="{ listStyleImage: 'url(' + website.icon + ')' }">
             <p>
               <a :href="website.link" target="_blank">{{ prettyLink( website.link ) }}</a>
               <br>
-              {{ website.description }} <small v-if="website.referralLink">[<a :href="website.referralLink">Referral Link</a>]</small>
+              {{ website.description }}
+              <br>
+              <small v-if="website.referralLink">[<a :href="website.referralLink">Referral Link</a>]</small>
             </p>
           </li>
         </ul>
         <p v-else>Loadings...</p>
+
+        <h2 id="promos">💸 Promo Codes</h2>
+        <ul class="promos" v-if="promos">
+          <li class="promo" v-for="promo in promos">
+            <h3 class="title">
+              <a :href="promo.link" target="_blank">{{ promo.name }}</a>
+            </h3>
+            <p class="promocode">
+              <input type="text" readonly onclick="select()" :value="promo.code">
+            </p>
+            <p>
+              {{ promo.description }}
+            </p>
+          </li>
+        </ul>
+        <p v-else>Loadings...</p>
+
+        <h2 id="tools">🛠 Tools</h2>
+        <ul class="tools" v-if="tools">
+          <li class="site" v-for="tool in tools" v-bind:style="{ listStyleImage: 'url(' + tool.icon + ')' }" v-if="tool.link">
+            <p>
+              <a :href="tool.link" target="_blank"><strong>{{ tool.name }}</strong></a>
+              –
+              {{ tool.description }}
+              <br>
+              <small v-if="tool.referralLink">[<a :href="tool.referralLink">
+                <template v-if="tool.referralText">{{ tool.referralText }}</template>
+                <template v-else>Referral Link</template>
+              </a>]</small>
+            </p>
+            <div class="tags" v-if="tool.tags">
+              <span class="tag" v-for="tag in tool.tags">{{ tag }}</span>
+            </div>
+          </li>
+        </ul>
+        <p v-else>Loadings...</p>
+
       </div>
     </div>
 
@@ -177,7 +216,9 @@
           id: "123dFQ4bZVXNtrmD23_xZCVNJd1_MAvdVY_yISiJcBYY",
           sheets: {
             websites: 1,
-            books: 2
+            books: 2,
+            tools: 3,
+            promos: 4
           }
         },
         spreadsheet: [],
@@ -330,7 +371,31 @@
               description: self.gsxGetCol( r, 'description' )
             }
           });
-        }
+        },
+        tools: function () {
+          return this.gsxRowObject( this.workbook.sheets.tools , function (r,self) {
+            var tags = self.gsxGetCol( r, 'tags');
+            return { //@TODO autmatically return
+              link: self.gsxGetCol( r, 'website'),
+              name: self.gsxGetCol( r, 'name'),
+              description: self.gsxGetCol( r, 'description'),
+              icon: self.iconSrc( self.gsxGetCol( r, 'website') ),
+              tags: (tags) ? self.gsxGetCol( r, 'tags').split(',') : false,
+              referralLink: self.gsxGetCol( r, 'referrallink'),
+              referralText: self.gsxGetCol( r, 'referraltext'),
+            }
+          });
+        },
+        promos: function () {
+          return this.gsxRowObject( this.workbook.sheets.promos , function (r,self) {
+            return { //@TODO autmatically return
+              code: self.gsxGetCol( r, 'promocode'),
+              name: self.gsxGetCol( r, 'title'),
+              description: self.gsxGetCol( r, 'description'),
+              link: self.gsxGetCol( r, 'url'),
+            }
+          });
+        },
       },
     });
 

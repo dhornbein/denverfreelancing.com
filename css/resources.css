@@ -576,14 +576,18 @@ li > label,
   opacity: 0.7; }
 
 .websites,
-.books {
+.books,
+.tools,
+.promos {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   grid-gap: 1.5rem;
   margin-top: 1.5rem; }
   @media screen and (max-width: 750px) {
     .websites,
-    .books {
+    .books,
+    .tools,
+    .promos {
       grid-template-columns: auto; } }
 
 .websites {
@@ -609,5 +613,39 @@ li > label,
     box-shadow: 1px 1px 0 #eee, 3px 3px 0 #eee, 4px 4px 0 #CCC; }
 .book p {
   margin-top: 0; }
+
+.tools {
+  grid-template-columns: repeat(auto-fit, minmax(600px, 1fr)); }
+  @media screen and (max-width: 750px) {
+    .tools {
+      grid-template-columns: auto; } }
+
+.tags .tag {
+  align-items: center;
+  background-color: #f5f5f5;
+  border-radius: 4px;
+  color: #4a4a4a;
+  display: inline-flex;
+  font-size: .6rem;
+  height: 2em;
+  justify-content: center;
+  line-height: 1.5;
+  padding-left: .75em;
+  padding-right: .75em;
+  white-space: nowrap;
+  margin-bottom: .5rem; }
+  .tags .tag:not(:last-child) {
+    margin-right: .5rem; }
+
+.promos {
+  padding-left: 0; }
+  .promos .promo {
+    background-color: #f5f5f5;
+    padding: 1.5rem; }
+    .promos .promo .title {
+      text-align: center; }
+    .promos .promo input {
+      background-color: #fff;
+      text-align: center; }
 
 /*# sourceMappingURL=resources.css.map */

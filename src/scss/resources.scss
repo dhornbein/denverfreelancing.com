@@ -24,7 +24,9 @@
 }
 
 .websites,
-.books {
+.books,
+.tools,
+.promos {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   grid-gap: $leading;
@@ -66,5 +68,49 @@
   }
   p {
     margin-top: 0;
+  }
+}
+
+.tools {
+  grid-template-columns: repeat(auto-fit, minmax(600px, 1fr));
+  @media screen and (max-width: $break-small) {
+    grid-template-columns: auto;
+  }
+}
+
+.tags {
+  .tag {
+    align-items: center;
+    background-color: #f5f5f5;
+    border-radius: 4px;
+    color: #4a4a4a;
+    display: inline-flex;
+    font-size: .6rem;
+    height: 2em;
+    justify-content: center;
+    line-height: 1.5;
+    padding-left: .75em;
+    padding-right: .75em;
+    white-space: nowrap;
+    margin-bottom: .5rem;
+    &:not(:last-child) {
+      margin-right: .5rem;
+    }
+  }
+
+}
+
+.promos {
+  padding-left: 0;
+  .promo {
+    background-color: #f5f5f5;
+    padding: $leading;
+    .title {
+      text-align: center;
+    }
+    input {
+      background-color: #fff;
+      text-align: center;
+    }
   }
 }
