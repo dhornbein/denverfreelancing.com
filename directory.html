@@ -36,6 +36,10 @@
         justify-content: space-between;
       }
 
+      .connect {
+        padding-bottom: .75rem;
+      }
+
       .person:hover {
         border-color: #00d1b2;
       }
@@ -59,7 +63,7 @@
             Freelancers Directory
           </h1>
           <h2 class="subtitle">
-            Primary subtitle
+            Welcome to a directory of Freelancers in the Denver area. If you would like to appear on this directory please fill out <a href="https://docs.google.com/forms/d/e/1FAIpQLScqYNJ6BBmYML2uZWs02i64KZdRmQg7kBkFRALHa5H3zs2ewA/viewform" target="_blank">this form</a>.
           </h2>
         </div>
       </div>
@@ -71,6 +75,7 @@
     <section class="section">
       <div id="main" class="container is-fluid">
         <p class="has-text-right">
+          <a class="button is-primary is-pulled-left" href="https://docs.google.com/forms/d/e/1FAIpQLScqYNJ6BBmYML2uZWs02i64KZdRmQg7kBkFRALHa5H3zs2ewA/viewform" target="_blank">List yourself</a>
           <button class="button" @click="filter.skills = {}" v-show="Object.keys(filter.skills).length > 0">Clear</button>
           <button class="button" @click="showTags = ! showTags">{{ (showTags) ? "Hide" : "Show" }} Tags</button>
         </p>
@@ -85,12 +90,20 @@
         </div>
 
         <div class="directory" v-if="people">
-          <div class="card person" v-for="person in people" v-show="person.filtered()">
+          <div class="card person" v-for="(person, index) in people" v-show="person.filtered()">
             <div class="card-content">
               <div class="content">
                 <p class="title is-4">{{ person.name }}</p>
-                <p class="subtitle is-6">{{ person.trade }}</p>
-                <hr>
+                <p class="subtitle is-6">
+                  {{ person.trade }}
+                </p>
+                <div class="connect">
+                  <template v-if="person.primarySite()">
+                    <a :href="person.primarySite().url" target="_blank"><span class="icon"><i :class="person.primarySite().icon"></i></span> {{ person.primarySite().label }}</a>
+                  </template>
+                  <a :href="'mailto:' + person.email" v-if="person.email"><span class="icon"><i class="fas fa-envelope"></i></span> Email</a>
+                  <a :href="'tel:' + person.phone" v-if="person.phone"><span class="icon"><i class="fas fa-phone"></i></span> Call</a>
+                </div>
                 <p v-if="person.location"><label>Location</label><br> {{ person.location }}</p>
                 <p v-if="person.cosmic"><label>Cosmic Task</label><br> {{ person.cosmic }}</p>
                 <template v-if="person.skills">
@@ -212,6 +225,13 @@
         stripSlash: function ( str ) {
           return str.replace(/\/$/, "");
         },
+        prettyLink: function ( url ) {
+          return this.stripSlash( this.stripHTTP( url ) );
+        },
+        sanitizeLink: function ( url ) {
+
+          return (url) ? '//' + this.prettyLink( url ) : url ;
+        },
         gsxRowObject: function ( index, action ) {
           if ( this.spreadsheet[index] === undefined ) return false;
           var out  = [],
@@ -282,30 +302,38 @@
                 skills:   skills,
                 links: {
                   website:  {
-                    url: self.gsxGetCol( r, 'personalwebsite'),
+                    url: self.sanitizeLink( self.gsxGetCol( r, 'personalwebsite') ),
                     label: 'website',
                     icon: 'fas fa-home'
                   },
                   linkedin: {
-                    url: self.gsxGetCol( r, 'linkedin'),
+                    url: self.sanitizeLink( self.gsxGetCol( r, 'linkedin') ),
                     label: 'linkedin',
                     icon: 'fab fa-linkedin'
                   },
                   facebook: {
-                    url: self.gsxGetCol( r, 'facebook'),
+                    url: self.sanitizeLink( self.gsxGetCol( r, 'facebook') ),
                     label: 'facebook',
                     icon: 'fab fa-facebook'
                   },
                   twitter:  {
-                    url: self.gsxGetCol( r, 'twitter'),
+                    url: self.sanitizeLink( self.gsxGetCol( r, 'twitter') ),
                     label: 'twitter',
                     icon: 'fab fa-twitter'
                   },
                   other:    {
-                    url: self.gsxGetCol( r, 'other'),
+                    url: self.sanitizeLink( self.gsxGetCol( r, 'other') ),
                     label: 'other',
                     icon: 'fas fa-globe-americas'
                   }
+                },
+                primarySite: function () {
+                  var link = this.links;
+                  if ( link.website.url ) return link.website;
+                  if ( link.linkedin.url ) return link.linkedin;
+                  if ( link.twitter.url ) return link.twitter;
+                  if ( link.facebook.url ) return link.facebook;
+                  return false;
                 }
               }
             });
