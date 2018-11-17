@@ -32,7 +32,9 @@
       <div class="resources">
         <h2 id="books">📖 Books</h2>
         <div class="books" v-if="books">
-          <div class="book" v-for="book in books" :href="book.link">
+          <div class="book"
+               :href="book.link"
+               v-for="book in books">
             <a :href="book.link" class="cover">
               <img :src="book.cover" :alt="book.title" v-if="book.cover">
             </a>
@@ -60,7 +62,9 @@
 
         <h2 id="websites">💻 Websites</h2>
         <ul class="websites" v-if="websites">
-          <li class="site" v-for="website in websites" v-bind:style="{ listStyleImage: 'url(' + website.icon + ')' }">
+          <li class="site"
+              v-for="website in websites"
+              v-bind:style="{ listStyleImage: 'url(' + website.icon + ')' }">
             <p>
               <a :href="website.link" target="_blank">{{ prettyLink( website.link ) }}</a>
               <br>
@@ -89,8 +93,16 @@
         <p v-else>Loadings...</p>
 
         <h2 id="tools">🛠 Tools</h2>
+        <p class="filter">
+          <label for="filter">Filter Tools</label>
+          <input type="text" name="filter" value="" v-model="search">
+        </p>
         <ul class="tools" v-if="tools">
-          <li class="site" v-for="tool in tools" v-bind:style="{ listStyleImage: 'url(' + tool.icon + ')' }" v-if="tool.link">
+          <li class="site"
+              v-for="tool in tools"
+              v-bind:style="{ listStyleImage: 'url(' + tool.icon + ')' }"
+              v-if="tool.link"
+              v-show="tool.filtered()">
             <p>
               <a :href="tool.link" target="_blank"><strong>{{ tool.name }}</strong></a>
               –
@@ -221,6 +233,8 @@
             promos: 4
           }
         },
+        search: '',
+        filter: [],
         spreadsheet: [],
         cacheLifttime: 1*60*60*1000, //hours*60*60*1000
       },
@@ -333,7 +347,11 @@
               self = this;
 
           for (var i = 0; i < rows.length; i++) {
-            out.push( action( rows[i], self ));
+            var rowObj = action( rows[i], self );
+            rowObj.filtered = function () {
+              return self.filterTest(this);
+            };
+            out.push( rowObj );
           }
 
           return out;
@@ -341,6 +359,24 @@
         gsxGetCol: function ( row, col ) {
           var cell = row['gsx$' + col];
           return ( cell && cell.$t ) ? cell.$t : null ;
+        },
+        filterTest: function (e) {
+          var search = this.search.trim().toLowerCase();
+
+          if ( '' == search ) return true; // no search means it's filtered
+
+          var results = [];
+
+          for ( var key in e ) {
+            if ( typeof e[key] === 'string' && e[key].toLowerCase().indexOf( search ) != -1 ) {
+              results.push(e[key]);
+            } else if ( typeof e[key] === 'object' && e[key] && e[key].join().toLowerCase().indexOf( search ) != -1 ) {
+              results.push(e[key].join());
+            }
+          }
+          
+          if ( results.length == 0) return false;
+          return true;
         }
       },
 
