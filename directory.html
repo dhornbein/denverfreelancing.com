@@ -71,20 +71,21 @@
     <section class="section">
       <div id="main" class="container is-fluid">
         <p class="has-text-right">
+          <button class="button" @click="filter.skills = {}" v-show="Object.keys(filter.skills).length > 0">Clear</button>
           <button class="button" @click="showTags = ! showTags">{{ (showTags) ? "Hide" : "Show" }} Tags</button>
         </p>
         <br>
         <div class="field is-grouped is-grouped-multiline" v-if="showTags">
-          <div class="control" v-for="skill in skills">
-            <a class="tags has-addons">
-              <div class="tag">{{ skill.label }}</div>
+          <div class="control" v-for="skill in skillsSorted">
+            <a class="tags has-addons" @click="toggleFilter('skills', skill )">
+              <div class="tag" :class="{ 'is-primary': skill.slug in filter.skills }">{{ skill.label }}</div>
               <div class="tag is-info" v-if="skill.count > 1">{{ skill.count }}</div>
             </a>
           </div>
         </div>
 
         <div class="directory" v-if="people">
-          <div class="card person" v-for="person in people">
+          <div class="card person" v-for="person in people" v-show="person.filtered()">
             <div class="card-content">
               <div class="content">
                 <p class="title is-4">{{ person.name }}</p>
@@ -95,7 +96,11 @@
                 <template v-if="person.skills">
                   <p><label>Skills</label></p>
                   <div class="skills tags">
-                    <span class="tag" :data-skill="skill.slug" v-for="(skill, index) in person.skills">{{ skill.label }}</span>
+                    <span class="tag"
+                          :class="{ 'is-primary': skill.slug in filter.skills }"
+                          :data-skill="skill.slug"
+                          v-for="(skill, index) in person.skills"
+                          @click="toggleFilter('skills', skill )">{{ skill.label }}</span>
                   </div>
                 </template>
               </div>
@@ -129,6 +134,9 @@
           sheets: {
             directory: 1,
           }
+        },
+        filter: {
+          skills: {}
         },
         spreadsheet: [],
         cacheLifttime: 48*60*60*1000, //hours*60*60*1000
@@ -220,6 +228,14 @@
           var cell = row['gsx$' + col];
           return ( cell && cell.$t ) ? cell.$t : null ;
         },
+        toggleFilter: function ( subject, item ) {
+          var filter = this.filter[subject];
+          if ( filter[item.slug] ) {
+            this.$delete(filter, item.slug)
+          } else {
+            this.$set(filter, item.slug, item)
+          }
+        }
 
       },
 
@@ -246,6 +262,17 @@
                     };
 
               return { //@TODO autmatically return
+                filtered: function () {
+                  // if the filter is empty show
+                  if ( Object.keys(self.filter.skills).length == 0 ) return true;
+
+                  for (var i in this.skills) {
+                    if (this.skills[i].slug in self.filter.skills) {
+                      return true
+                    }
+                  }
+                  return false
+                },
                 name:     fullname,
                 email:    self.gsxGetCol( r, 'emailaddress'),
                 location: self.gsxGetCol( r, 'location'),
@@ -293,6 +320,7 @@
                 } else {
                   tags[s.slug] = {
                     label: s.label,
+                    slug: s.slug,
                     count: 1
                   }
                 }
@@ -300,6 +328,18 @@
             }
           });
           return tags;
+        },
+        skillsSorted: function () {
+          var out = {},
+              data = this.skills;
+
+          Object.keys(data)
+                .sort()
+                .forEach(function(v, i) {
+                    out[v] = data[v];
+                 });
+
+          return out;
         }
       },
     });
