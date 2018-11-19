@@ -395,10 +395,8 @@
           var id = 'drewinganddoi-20';
           // removes everything from the ? to the end of string
           if ( url.lastIndexOf('?') > 0) url = url.substring(0, url.lastIndexOf('?'));
-          // removes trailing slash @TODO use trailing slash function?
-          if ( url.lastIndexOf('/') > 0) url = url.substring(0, url.lastIndexOf('/'));
-          url = this.stripSlash( url );
-          return url + '/?tag=' + id;
+
+          return this.stripSlash( url ) + '/?tag=' + id;
         },
         /**
          * Generates a product image url from amazon product URL
