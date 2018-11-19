@@ -568,27 +568,36 @@
 
 
     /**
-    * @TODO is this event working???
+    * @TODO perhaps a better method: https://gist.github.com/juriansluiman/25cb3baf2c54ff8e0019
     * Function that tracks a click on an outbound link in Analytics.
     * This function takes a valid URL string as an argument, and uses that URL string
     * as the event label. Setting the transport method to 'beacon' lets the hit be sent
     * using 'navigator.sendBeacon' in browser that support it.
     */
-    var trackOutboundLink = function(url) {
-       gtag('send', 'event', 'outbound', 'click', url, {
-         'transport': 'beacon',
-         'hitCallback': function(){ document.location = url; }
-       });
+    var trackOutboundLink = function(e) {
+      // logic taken from https://gist.github.com/wei/34de0d72ff13ba45cafda661fc0e0449
+      var a = e.target.closest('a')
+      var url = a.href;
+      var openingInNewWindow = (a.target && !a.target.match(/^_(self|parent|top)$/i)) || e.ctrlKey || e.shiftKey || e.metaKey;
+
+      gtag('event', 'click', {
+        'event_category': 'outbound',
+        'event_label': url,
+        'transport_type': 'beacon',
+        'event_callback': openingInNewWindow ? null : function(){ document.location = url; }
+      });
+
+      return openingInNewWindow;
     }
 
     app.$nextTick( function () {
 
-      var a = document.getElementsByTagName('a');
+      var a = document.links;
 
       for (var i = 0; i < a.length; i++) {
         if ( isExternalLink( a[i] )) {
-          a[i].onclick = function () {
-            trackOutboundLink( this.href );
+          a[i].onclick = function (e) {
+            return trackOutboundLink(e);
           }
         }
       }
