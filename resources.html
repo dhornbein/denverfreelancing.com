@@ -1,223 +1,272 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-96951579-3"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+<html lang="en">
 
-      gtag('config', 'UA-96951579-3');
-    </script>
+<head>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-96951579-3"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://cdn.rawgit.com/jgthms/minireset.css/master/minireset.css">
-    <title>Resources: Denver Freelancers</title>
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico"/>
-    <link rel="stylesheet" href="css/resources.css">
-  </head>
-  <body>
-    <nav><small><a href="/">Home</a></small></nav>
-    <h1>Resources</h1>
-    <p>
-      Check out these books, websites, promo codes, and tools recomended by other freelancers.
-    </p>
-    <p class="hug note">
-      * Some of the websites and books use affiliate links to help raise money, you can support this project by clicking the links! Also, content on this page is publically editable, if you see something amiss please <a href="mailto:hello@denverfreelancing.com">email us</a>
-    </p>
-    <div id="main">
-      <div class="resources">
-        <h2 id="books">📖 Books</h2>
-        <div class="books" v-if="books">
-          <div class="book"
-               :href="book.link"
-               v-for="book in books">
-            <a :href="book.link" class="cover">
-              <img :src="book.cover" :alt="book.title" v-if="book.cover">
-            </a>
-            <p>
-              <strong>{{ book.title }}</strong>
-            </p>
-            <p class="desc">
-              {{ book.description }}
-              <br>
-              <a :href="book.link" v-if="book.link">Buy on Amazon</a>
-            </p>
-          </div>
-        </div>
-        <p v-else>Loadings...</p>
+    gtag('config', 'UA-96951579-3');
+  </script>
 
-        <div class="callout">
-          <p>
-            <strong>Got more resources?</strong>
-            Resources on this page come from a public Google Spreadsheet, feel free to add or edit!
-          </p>
-          <p>
-            <a :href="workbookEditURL" class="button">View Spreadsheet</a>
-          </p>
-        </div>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <title>Resources for Denver Area Freelancers</title>
+  <meta name="description" content="Resources for Denver area freelancers">
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
 
-        <h2 id="websites">💻 Websites</h2>
-        <ul class="websites" v-if="websites">
-          <li class="site"
-              v-for="website in websites"
-              v-bind:style="{ listStyleImage: 'url(' + website.icon + ')' }">
-            <p>
-              <a :href="website.link" target="_blank">{{ prettyLink( website.link ) }}</a>
-              <br>
-              {{ website.description }}
-              <br>
-              <small v-if="website.referralLink">[<a :href="website.referralLink">Referral Link</a>]</small>
-            </p>
-          </li>
-        </ul>
-        <p v-else>Loadings...</p>
+  <!-- Font Awesome -->
+  <link href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" rel="stylesheet">
+  <!-- Bootstrap core CSS -->
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <!-- Material Design Bootstrap -->
+  <link href="css/mdb.min.css" rel="stylesheet">
+  <!-- Your custom styles (optional) -->
+  <link href="css/resources-mdb.min.css" rel="stylesheet">
+</head>
 
-        <h2 id="promos">💸 Promo Codes</h2>
-        <ul class="promos" v-if="promos">
-          <li class="promo" v-for="promo in promos">
-            <h3 class="title">
-              <a :href="promo.link" target="_blank">{{ promo.name }}</a>
-            </h3>
-            <p class="promocode">
-              <input type="text" readonly onclick="select()" :value="promo.code">
-            </p>
-            <p>
-              {{ promo.description }}
-            </p>
-          </li>
-        </ul>
-        <p v-else>Loadings...</p>
+<body>
+  <!--Main Navigation-->
+  <header>
+    <!-- Navbar -->
+    <nav class="navbar fixed-top navbar-expand-lg navbar-light white scrolling-navbar">
+      <div class="container">
+        <!-- Brand -->
+        <a class="navbar-brand waves-effect" href="./index.html">
+          <strong>Denver Area<br>Freelancers</strong>
+        </a>
+        <!-- Collapse -->
+        <button class="navbar-toggler" type="button"
+                data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <!-- Links -->
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <!-- Left -->
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <a class="nav-link waves-effect" href="./index.html">
+                Home
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link waves-effect" href="./vision.html">
+                Vision
+              </a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link waves-effect" href="./resources.html">
+                Resources
+                <span class="sr-only">(current)</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="subscribe.html">
+                Subscribe
+               </a>
+            </li>
+          </ul>
+          <!-- Right -->
+          <ul class="navbar-nav nav-flex-icons">
+            <li class="nav-item">
+              <a class="nav-link waves-effect"
+                 href="https://www.facebook.com/events/1064508467084854/"
+                 target="_blank">
+                <i class="fab fa-2x fa-facebook-f"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link waves-effect"
+                 href="https://www.meetup.com/Colorado-Co-ops-Study-Circle/events/258363973/"
+                 target="_blank">
+                <i class="fab fa-2x fa-meetup"></i>
+              </a>
+            </li>
+          </ul>
+        </div><!-- #navbarSupportedContent -->
+      </div><!-- .container -->
+    </nav><!-- Navbar -->
+  </header><!--Main Navigation-->
 
-        <h2 id="tools">🛠 Tools</h2>
-        <p class="filter">
-          <label for="filter">Filter Tools</label>
-          <input type="text" name="filter" value="" v-model="search">
-        </p>
-        <ul class="tools" v-if="tools">
-          <li class="site"
-              v-for="tool in tools"
-              v-bind:style="{ listStyleImage: 'url(' + tool.icon + ')' }"
-              v-if="tool.link"
-              v-show="tool.filtered()">
-            <p>
-              <a :href="tool.link" target="_blank"><strong>{{ tool.name }}</strong></a>
-              –
-              {{ tool.description }}
-              <br>
-              <small v-if="tool.referralLink">[<a :href="tool.referralLink">
-                <template v-if="tool.referralText">{{ tool.referralText }}</template>
-                <template v-else>Referral Link</template>
-              </a>]</small>
-            </p>
-            <div class="tags" v-if="tool.tags">
-              <span class="tag" v-for="tag in tool.tags">{{ tag }}</span>
-            </div>
-          </li>
-        </ul>
-        <p v-else>Loadings...</p>
+  <!--Main layout-->
+  <main class="mt-5 pt-5">
+    <div class="container mt-5">
+      <section class="card wow fadeIn" id="mailing">
 
-      </div>
+        <!-- Heading and Introductory Paragraph -->
+        <div class="row justify-content-center wow fadeIn">
+          <div class="col-md-10 col-lg-9 col-xl-8">
+            <div class="card-body">
+              <h1 class="h1 text-center my-4">
+                <strong>
+                  Resources
+                </strong>
+              </h1>
+              <p class="lead m-3">
+                <strong>
+                 Check out these books, websites, promo codes, and tools recomended by other freelancers.
+                </strong>
+              </p>
+              <p class="note">
+                <em>
+                  * Some of the websites and books use affiliate links to help raise money,
+                   you can support this project by clicking the links!
+                  Also, content on this page is publically editable, if you see
+                   something amiss please
+                   <a href="mailto:hello@denverfreelancing.com">email us</a>.
+                </em>
+              </p>
+            </div><!-- .card-body -->
+          </div><!--.col-->
+        </div><!-- .row -->
+
+        <!-- Lists of Resources - Populated using JavaScript and Vue -->
+        <div class="row justify-content-center wow fadeIn">
+          <div id="main">
+            <div class="resources">
+              <h2 class="display-4 text-center font-weight-bold" id="books">📖 Books</h2>
+              <div class="row justify-content-around wow fadeIn">
+                <div class="books" v-if="books">
+                  <div class="book"
+                       :href="book.link"
+                       v-for="book in books">
+                    <div class="col-md-6 col-lg-4">
+                      <div class="card">
+                        <a :href="book.link" class="cover">
+                          <img :src="book.cover" :alt="book.title" v-if="book.cover">
+                        </a>
+                        <p>
+                          <strong>{{ book.title }}</strong>
+                        </p>
+                        <p class="desc">
+                          {{ book.description }}
+                          <br>
+                          <a :href="book.link" v-if="book.link">Buy on Amazon</a>
+                        </p>
+                      </div><!-- .card -->
+                    </div><!-- .col-* -->
+                  </div><!-- .book -->
+                </div><!-- .books -->
+                <p v-else>Loadings...</p>
+              </div><!-- .row -->
+
+              <div class="callout">
+                <p>
+                  <strong>Got more resources?</strong>
+                  Resources on this page come from a public Google Spreadsheet, feel free to add or edit!
+                </p>
+                <p>
+                  <a :href="workbookEditURL" class="button">View Spreadsheet</a>
+                </p>
+              </div>
+
+              <h2 class="display-4 text-center font-weight-bold" id="websites">💻 Websites</h2>
+              <ul class="websites" v-if="websites">
+                <li class="site"
+                    v-for="website in websites"
+                    v-bind:style="{ listStyleImage: 'url(' + website.icon + ')' }">
+                  <p>
+                    <a :href="website.link" target="_blank">{{ prettyLink( website.link ) }}</a>
+                    <br>
+                    {{ website.description }}
+                    <br>
+                    <small v-if="website.referralLink">[<a :href="website.referralLink">Referral Link</a>]</small>
+                  </p>
+                </li>
+              </ul>
+              <p v-else>Loadings...</p>
+
+              <h2 class="display-4 text-center font-weight-bold" id="promos">💸 Promo Codes</h2>
+              <ul class="promos" v-if="promos">
+                <li class="promo" v-for="promo in promos">
+                  <h3 class="title">
+                    <a :href="promo.link" target="_blank">{{ promo.name }}</a>
+                  </h3>
+                  <p class="promocode">
+                    <input type="text" readonly onclick="select()" :value="promo.code">
+                  </p>
+                  <p>
+                    {{ promo.description }}
+                  </p>
+                </li>
+              </ul>
+              <p v-else>Loadings...</p>
+
+              <h2 class="display-4 text-center font-weight-bold" id="tools">🛠 Tools</h2>
+              <p class="filter">
+                <label for="filter">Filter Tools</label>
+                <input type="text" name="filter" value="" v-model="search">
+              </p>
+              <ul class="tools" v-if="tools">
+                <li class="site"
+                    v-for="tool in tools"
+                    v-bind:style="{ listStyleImage: 'url(' + tool.icon + ')' }"
+                    v-if="tool.link"
+                    v-show="tool.filtered()">
+                  <p>
+                    <a :href="tool.link" target="_blank"><strong>{{ tool.name }}</strong></a>
+                    –
+                    {{ tool.description }}
+                    <br>
+                    <small v-if="tool.referralLink">[<a :href="tool.referralLink">
+                      <template v-if="tool.referralText">{{ tool.referralText }}</template>
+                      <template v-else>Referral Link</template>
+                    </a>]</small>
+                  </p>
+                  <div class="tags" v-if="tool.tags">
+                    <span class="tag" v-for="tag in tool.tags">{{ tag }}</span>
+                  </div>
+                </li>
+              </ul>
+              <p v-else>Loadings...</p>
+
+            </div><!-- .resources -->
+          </div><!-- #main -->
+        </div><!-- .row -->
+      </section>
+
+    </div><!-- .container -->
+  </main>
+
+  <footer class="page-footer text-center font-small mdb-color darken-2 mt-4 wow fadeIn">
+    <div class="footer-copyright py-3">
+      © Copyright 2019 by
+      <a href="https://medium.com/@hornbein"
+         title="Drew Hornbein @hornbein on medium.com" target="_blank">
+        Drew Hornbein</a>.
+      Some rights reserved.
+      <br>
+      Site by
+      <a href="https://JooMooWebSites.com"
+         title="JooMooWebSites.com home page" target="_blank">
+        JooMoo WebSites LLC</a>.
     </div>
+  </footer>
 
-    <section id="mailing">
-      <h2>💌 Join our mailling list</h2>
-      <p>We'll send you the low down on upcoming events! Feel free to add more info about what kind of work you do so we can invite you to industry specific events.</p>
-      <p><a href="https://us19.campaign-archive.com/home/?u=97afb037a144713094675ad46&id=dcfadf78b1" title="View previous campaigns">View previous campaigns.</a></p>
-      <div class="mail-signup">
-        <!-- Begin Mailchimp Signup Form -->
-        <div id="mc_embed_signup">
-        <form action="https://facebook.us19.list-manage.com/subscribe/post?u=97afb037a144713094675ad46&amp;id=dcfadf78b1" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
-            <p class="indicates-required grid-full"><span class="asterisk">*</span> <small>indicates required</small></p>
-            <div id="mc_embed_signup_scroll" class="form-body">
+  <!-- SCRIPTS -->
+  <!-- JQuery -->
+  <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+  <!-- Bootstrap tooltips -->
+  <script type="text/javascript" src="js/popper.min.js"></script>
+  <!-- Bootstrap core JavaScript -->
+  <script type="text/javascript" src="js/bootstrap.min.js"></script>
+  <!-- MDB core JavaScript -->
+  <script type="text/javascript" src="js/mdb.min.js"></script>
+  <!-- Initializations -->
+  <script type="text/javascript">
+      // Animations initialization
+      new WOW().init();
+  </script>
 
-        <div class="mc-field-group grid-full">
-        	<label for="mce-EMAIL">Email Address  <span class="asterisk">*</span></label>
-        	<input type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL">
-        </div>
-
-        <div class="grid-full">
-          <input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"> <small>Or fill out more info...</small>
-        </div>
-
-        <div class="mc-field-group grid-half">
-        	<label for="mce-FNAME">First Name </label>
-        	<input type="text" value="" name="FNAME" class="" id="mce-FNAME">
-        </div>
-
-        <div class="mc-field-group grid-half">
-        	<label for="mce-LNAME">Last Name </label>
-        	<input type="text" value="" name="LNAME" class="" id="mce-LNAME">
-        </div>
-
-        <div class="mc-field-group size1of2 grid-half">
-        	<label for="mce-PHONE">Phone Number </label>
-        	<input type="text" name="PHONE" class="" value="" id="mce-PHONE">
-        </div>
-
-        <div class="mc-field-group size1of2 grid-half">
-        	<label for="mce-BIRTHDAY-month">Birthday </label>
-        	<div class="datefield">
-        		<span class="subfield monthfield"><input class="birthday " type="text" pattern="[0-9]*" value="" placeholder="MM" size="3" maxlength="2" name="BIRTHDAY[month]" id="mce-BIRTHDAY-month"></span> /
-        		<span class="subfield dayfield"><input class="birthday " type="text" pattern="[0-9]*" value="" placeholder="DD" size="3" maxlength="2" name="BIRTHDAY[day]" id="mce-BIRTHDAY-day"></span>
-        		<span class="small-meta nowrap">( mm / dd )</span>
-        	</div>
-        </div>
-
-        <div class="mc-field-group input-group grid-half">
-            <strong>What are you interested in? </strong>
-            <ul><li><input type="checkbox" value="1" name="group[895][1]" id="mce-group[895]-895-0"><label for="mce-group[895]-895-0">Shared Gigs</label></li>
-        <li><input type="checkbox" value="2" name="group[895][2]" id="mce-group[895]-895-1"><label for="mce-group[895]-895-1">Shared resources &amp; equipment</label></li>
-        <li><input type="checkbox" value="4" name="group[895][4]" id="mce-group[895]-895-2"><label for="mce-group[895]-895-2">Community Building</label></li>
-        <li><input type="checkbox" value="8" name="group[895][8]" id="mce-group[895]-895-3"><label for="mce-group[895]-895-3">Freelancer Policy</label></li>
-        </ul>
-        </div>
-        <div class="mc-field-group input-group grid-half">
-            <strong>What kind of freelance work do you do? </strong>
-            <ul>
-              <li><input type="checkbox" value="16" name="group[899][16]" id="mce-group[899]-899-0"><label for="mce-group[899]-899-0">Photography</label></li>
-              <li><input type="checkbox" value="32" name="group[899][32]" id="mce-group[899]-899-1"><label for="mce-group[899]-899-1">Design</label></li>
-              <li><input type="checkbox" value="64" name="group[899][64]" id="mce-group[899]-899-2"><label for="mce-group[899]-899-2">Video</label></li>
-              <li><input type="checkbox" value="128" name="group[899][128]" id="mce-group[899]-899-3"><label for="mce-group[899]-899-3">Social Media</label></li>
-              <li><input type="checkbox" value="256" name="group[899][256]" id="mce-group[899]-899-4"><label for="mce-group[899]-899-4">Copywriting</label></li>
-              <li><input type="checkbox" value="512" name="group[899][512]" id="mce-group[899]-899-5"><label for="mce-group[899]-899-5">Consulting</label></li>
-              <li><input type="checkbox" value="1024" name="group[899][1024]" id="mce-group[899]-899-6"><label for="mce-group[899]-899-6">Data</label></li>
-              <li><input type="checkbox" value="2048" name="group[899][2048]" id="mce-group[899]-899-7"><label for="mce-group[899]-899-7">Marketing/PR</label></li>
-              <li><input type="checkbox" value="4096" name="group[899][4096]" id="mce-group[899]-899-8"><label for="mce-group[899]-899-8">Web Design/Development</label></li>
-              <li><input type="checkbox" value="8192" name="group[899][8192]" id="mce-group[899]-899-9"><label for="mce-group[899]-899-9">Accounting/Bookkeeping</label></li>
-              <li><input type="checkbox" value="16384" name="group[899][16384]" id="mce-group[899]-899-10"><label for="mce-group[899]-899-10">Other</label></li>
-            </ul>
-          </div>
-
-        	<div id="mce-responses" class="clear grid-full">
-        		<div class="response" id="mce-error-response" style="display:none"></div>
-        		<div class="response" id="mce-success-response" style="display:none"></div>
-            <input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button">
-        	</div>
-
-          <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
-            <div style="position: absolute; left: -5000px;" aria-hidden="true">
-              <input type="text" name="b_97afb037a144713094675ad46_dcfadf78b1" tabindex="-1" value="">
-            </div>
-            </div>
-        </form>
-        </div>
-        <script type='text/javascript' src='//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js'></script><script type='text/javascript'>(function($) {window.fnames = new Array(); window.ftypes = new Array();fnames[0]='EMAIL';ftypes[0]='email';fnames[1]='FNAME';ftypes[1]='text';fnames[2]='LNAME';ftypes[2]='text';fnames[3]='ADDRESS';ftypes[3]='address';fnames[4]='PHONE';ftypes[4]='phone';fnames[5]='BIRTHDAY';ftypes[5]='birthday';}(jQuery));var $mcj = jQuery.noConflict(true);</script>
-        <!--End mc_embed_signup-->
-      </div>
-    </section>
-
-    <section id="contact">
-      <h1>👋 Get in touch!</h1>
-      <p class="lead">We are real people just like you, feel free to reach out.</p>
-      <p class="lead"><a href="mailto:hello@denverfreelancing.com" class="button">Email us</a></p>
-      <p>hello@denverfreelancing.com</p>
-    </section>
-
-    <script>
+  <!-- JavaScript Using Vue to pull data -->
+  <script>
 
     "use strict"
 
@@ -609,6 +658,9 @@
       return ( linkObj.hostname !== host );
     }
 
-    </script>
-  </body>
+  </script>
+
+
+</body>
+
 </html>
