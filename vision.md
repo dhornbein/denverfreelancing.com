@@ -1,108 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-96951579-3"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-
-    gtag('config', 'UA-96951579-3');
-  </script>
-
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
-  <title>Denver Area Freelancing: Vision</title>
-  <meta name="description" content="A vision for a network of Denver area freelancers">
-  <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
-
-  <!-- Font Awesome -->
-  <link href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" rel="stylesheet">
-  <!-- Bootstrap core CSS -->
-  <link href="css/bootstrap.min.css" rel="stylesheet">
-  <!-- Material Design Bootstrap -->
-  <link href="css/mdb.min.css" rel="stylesheet">
-  <!-- Your custom styles (optional) -->
-  <link href="css/vision.min.css" rel="stylesheet">
-</head>
-
-<body>
-  <!--Main Navigation-->
-  <header>
-    <!-- Navbar -->
-    <nav class="navbar fixed-top navbar-expand-lg navbar-light white scrolling-navbar">
-      <div class="container">
-        <!-- Brand -->
-        <a class="navbar-brand mr-4" href="./index.html">
-          <strong>Denver Area<br>Freelancers</strong>
-        </a>
-        <!-- Collapse -->
-        <button class="navbar-toggler" type="button"
-                data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <!-- Links -->
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <!-- Left -->
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-              <a class="nav-link" href="index.html">Home
-              </a>
-            </li>
-            <li class="nav-item active">
-              <a class="nav-link" href="vision.html">
-                Vision
-                <span class="sr-only">(current)</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="resources.html">
-                Resources
-               </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/directory">
-                Directory
-               </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="subscribe.html">
-                Subscribe
-               </a>
-            </li>
-          </ul>
-          <!-- Right -->
-          <ul class="navbar-nav nav-flex-icons">
-            <li class="nav-item">
-              <a class="nav-link"
-                 href="https://www.facebook.com/events/1064508467084854/"
-                 target="_blank">
-                <i class="fab fa-2x fa-facebook-f"></i>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link"
-                 href="https://www.meetup.com/Colorado-Co-ops-Study-Circle/events/258363973/"
-                 target="_blank">
-                <i class="fab fa-2x fa-meetup"></i>
-              </a>
-            </li>
-          </ul>
-        </div><!-- #navbarSupportedContent -->
-      </div><!-- .container -->
-    </nav><!-- Navbar -->
-  </header><!--Main Navigation-->
-
+---
+title: Vision
+permalink: /vision/
+---
   <!--Main layout-->
   <main class="mt-5 pt-5">
     <div class="container">
       <div class="card m-3">
-        <img class="card-img-top" src="assets/img/ethan-weil-unsplash.jpg" alt="Card image cap">
+        <img class="card-img-top" src="{{ 'assets/img/ethan-weil-unsplash.jpg' | relative_url }}" alt="Card image cap">
         <section class="wow fadeIn m-2 card-img-overlay text-right" id="intro">
           <p>
             <strong>The #BetterTogetherDenver Vision</strong>
@@ -165,7 +69,7 @@
               </p>
 
               <figure>
-                <img src="assets/img/better-together-pros_and_cons.jpg" class="img-fluid"
+                <img src="{{ 'assets/img/better-together-pros_and_cons.jpg' | relative_url }}" class="img-fluid"
                      alt="Image showing lists of pros and cons about freelancing">
                 <figcaption class="text-center font-weight-bold mt-2">
                   DSW attendees' thoughts on Freelancing.</figcaption>
@@ -186,7 +90,7 @@
 
               <p class="text-center">
                 <button type="button" class="btn btn-indigo">
-                  <a class="white-text" href="subscribe.html" role="button">
+                  <a class="white-text" href="{{ '/subscribe' | relative_url }}" role="button">
                     <i class="fas fa-envelope"></i> Subscribe for updates
                   </a>
                 </button>
@@ -197,36 +101,3 @@
       </div><!-- .card -->
     </div><!-- .container -->
   </main><!--Main layout-->
-
-  <footer class="page-footer text-center font-small mdb-color darken-2 mt-4 wow fadeIn">
-    <div class="footer-copyright py-3">
-      © Copyright 2019 by
-      <a href="https://medium.com/@hornbein"
-         title="Drew Hornbein @hornbein on medium.com" target="_blank">
-        Drew Hornbein</a>.
-      Some rights reserved.
-      <br>
-      Site by
-      <a href="https://JooMooWebSites.com"
-         title="JooMooWebSites.com home page" target="_blank">
-        JooMoo WebSites LLC</a>.
-    </div>
-  </footer>
-
-  <!-- SCRIPTS -->
-  <!-- JQuery -->
-  <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
-  <!-- Bootstrap tooltips -->
-  <script type="text/javascript" src="js/popper.min.js"></script>
-  <!-- Bootstrap core JavaScript -->
-  <script type="text/javascript" src="js/bootstrap.min.js"></script>
-  <!-- MDB core JavaScript -->
-  <script type="text/javascript" src="js/mdb.min.js"></script>
-  <!-- Initializations -->
-  <script type="text/javascript">
-    // Animations initialization
-    new WOW().init();
-  </script>
-</body>
-
-</html>

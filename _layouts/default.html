@@ -1,0 +1,87 @@
+---
+---
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-96951579-3"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-96951579-3');
+  </script>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <title>{{ page.title }} | {{ site.title }}</title>
+  <meta name="description" content="A network of Denver area freelancers">
+  <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+
+  <!-- Font Awesome -->
+  <link href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" rel="stylesheet">
+  <!-- Bootstrap core CSS -->
+  <link href="{{ '/css/bootstrap.min.css' | relative_url }}" rel="stylesheet">
+  <!-- Material Design Bootstrap -->
+  <link href="{{ '/css/mdb.min.css' | relative_url }}" rel="stylesheet">
+  <!-- Your custom styles (optional) -->
+  <link href="{{ '/css/home.min.css' | relative_url }}" rel="stylesheet">
+  <style type="text/css">
+    @media (min-width: 800px) and (max-width: 850px) {
+      .navbar:not(.top-nav-collapse) {
+        background: #1C2331 !important;
+      }
+    }
+  </style>
+  {% if page.vue %}
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  {% endif %}
+</head>
+
+<body>
+
+  {% include nav.html %}
+
+  {{ content }}
+
+  <footer class="page-footer text-center font-small mdb-color darken-2 mt-4 wow fadeIn">
+    <div class="footer-copyright py-3">
+      © Copyright 2019 by
+      <a href="//dhornbein.com"
+         title="Drew Hornbein's personal site" target="_blank">
+        Drew Hornbein</a>.
+      Some rights reserved.
+      <br>
+      Site by
+      <a href="https://JooMooWebSites.com"
+         title="JooMooWebSites.com home page" target="_blank">
+        JooMoo WebSites LLC</a>.
+    </div>
+  </footer>
+
+  <!-- SCRIPTS -->
+  <!-- JQuery -->
+  <script type="text/javascript" src="{{ '/js/jquery-3.3.1.min.js' | relative_url }}"></script>
+  <!-- Bootstrap tooltips -->
+  <script type="text/javascript" src="{{ '/js/popper.min.js' | relative_url }}"></script>
+  <!-- Bootstrap core JavaScript -->
+  <script type="text/javascript" src="{{ '/js/bootstrap.min.js' | relative_url }}"></script>
+  <!-- MDB core JavaScript -->
+  <script type="text/javascript" src="{{ '/js/mdb.min.js' | relative_url }}"></script>
+  <!-- Initializations -->
+  <script type="text/javascript">
+    // Animations initialization
+    new WOW().init();
+  </script>
+
+  {% if page.js %}
+    {% for link in page.js %}
+    <script type="text/javascript" src="{{ '/js/' | relative_url }}{{ link }}"></script>
+    {% endfor %}
+  {% endif %}
+</body>
+
+</html>

@@ -1,0 +1,52 @@
+<!-- Main Navigation -->
+{% if page.navbar.dark %}
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar">
+{% else %}
+<nav class="navbar fixed-top navbar-expand-lg navbar-light white scrolling-navbar">
+{% endif %}
+  <div class="container">
+    <!-- Brand -->
+    <a class="navbar-brand mr-4" href="./index.html">
+      <strong>{{ site.data.navigation.title }}</strong>
+    </a>
+    <!-- Collapse -->
+    <button class="navbar-toggler" type="button"
+            data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false"
+            aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <!-- Links -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <!-- Left -->
+      <ul class="navbar-nav mr-auto">
+        {% for node in site.data.navigation.left %}
+          {% if page.url == node.link %}
+            <li class="nav-item active">
+              <a class="nav-link" href="{{ node.link }}">{{ node.name }}
+                <span class="sr-only">(current)</span>
+              </a>
+            </li>
+          {% else %}
+          <li class="nav-item">
+            <a class="nav-link" href="{{ node.link }}">{{ node.name }}
+            </a>
+          </li>
+          {% endif %}
+        {% endfor %}
+      </ul>
+      <!-- Right -->
+      <ul class="navbar-nav nav-flex-icons">
+        {% for node in site.data.navigation.right %}
+        <li class="nav-item">
+          <a class="nav-link"
+          href="{{ node.link }}"
+          target="_blank">
+            <i class="{{ node.icon }}"></i>
+          </a>
+        </li>
+        {% endfor %}
+      </ul>
+    </div><!-- #navbarSupportedContent -->
+  </div><!-- .container -->
+</nav><!-- Navbar -->

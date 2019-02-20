@@ -1,3 +1,8 @@
+---
+title: Directory
+layout: false
+permalink: /directory/
+---
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
@@ -77,14 +82,14 @@
         <p class="has-text-right">
           <a class="button is-primary is-pulled-left" href="/directory/join.html">List yourself</a>
           <button class="button" @click="filter.skills = {}" v-show="Object.keys(filter.skills).length > 0">Clear</button>
-          <button class="button" @click="showTags = ! showTags">{{ (showTags) ? "Hide" : "Show" }} Tags</button>
+          <button class="button" @click="showTags = ! showTags">(( (showTags) ? "Hide" : "Show" )) Tags</button>
         </p>
         <br>
         <div class="field is-grouped is-grouped-multiline" v-if="showTags">
           <div class="control" v-for="skill in skillsSorted">
             <a class="tags has-addons" @click="toggleFilter('skills', skill )">
-              <div class="tag" :class="{ 'is-primary': skill.slug in filter.skills }">{{ skill.label }}</div>
-              <div class="tag is-info" v-if="skill.count > 1">{{ skill.count }}</div>
+              <div class="tag" :class="{ 'is-primary': skill.slug in filter.skills }">(( skill.label ))</div>
+              <div class="tag is-info" v-if="skill.count > 1">(( skill.count ))</div>
             </a>
           </div>
         </div>
@@ -93,19 +98,19 @@
           <div class="card person" v-for="(person, index) in people" v-show="person.filtered()">
             <div class="card-content">
               <div class="content">
-                <p class="title is-4">{{ person.name }}</p>
+                <p class="title is-4">(( person.name ))</p>
                 <p class="subtitle is-6">
-                  {{ person.trade }}
+                  (( person.trade ))
                 </p>
                 <div class="connect">
                   <template v-if="person.primarySite()">
-                    <a :href="person.primarySite().url" target="_blank"><span class="icon"><i :class="person.primarySite().icon"></i></span> {{ person.primarySite().label }}</a>
+                    <a :href="person.primarySite().url" target="_blank"><span class="icon"><i :class="person.primarySite().icon"></i></span> (( person.primarySite().label ))</a>
                   </template>
                   <a :href="'mailto:' + person.email" v-if="person.email"><span class="icon"><i class="fas fa-envelope"></i></span> Email</a>
                   <a :href="'tel:' + person.phone" v-if="person.phone"><span class="icon"><i class="fas fa-phone"></i></span> Call</a>
                 </div>
-                <p v-if="person.location"><label>Location</label><br> {{ person.location }}</p>
-                <p v-if="person.cosmic"><label>Cosmic Task</label><br> {{ person.cosmic }}</p>
+                <p v-if="person.location"><label>Location</label><br> (( person.location ))</p>
+                <p v-if="person.cosmic"><label>Cosmic Task</label><br> (( person.cosmic ))</p>
                 <template v-if="person.skills">
                   <p><label>Skills</label></p>
                   <div class="skills tags">
@@ -113,7 +118,7 @@
                           :class="{ 'is-primary': skill.slug in filter.skills }"
                           :data-skill="skill.slug"
                           v-for="(skill, index) in person.skills"
-                          @click="toggleFilter('skills', skill )">{{ skill.label }}</span>
+                          @click="toggleFilter('skills', skill )">(( skill.label ))</span>
                   </div>
                 </template>
               </div>
@@ -135,10 +140,11 @@
           count: 0
         }
       },
-      template: '<footer class="card-footer links"><a :href="link.url" class="card-footer-item" v-for="link in links" v-if="link.url" target="_blank" :title="link.label"><span class="icon"><i :class="link.icon"></i></span> <span class="label">{{ link.label }}</span></a></footer>'
+      template: '<footer class="card-footer links"><a :href="link.url" class="card-footer-item" v-for="link in links" v-if="link.url" target="_blank" :title="link.label"><span class="icon"><i :class="link.icon"></i></span> <span class="label">(( link.label ))</span></a></footer>'
     })
 
     var app = new Vue({
+      delimiters: ["((", "))"],
       el: "#main",
       data: {
         showTags: false,
