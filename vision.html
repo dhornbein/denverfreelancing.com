@@ -36,7 +36,7 @@
     <nav class="navbar fixed-top navbar-expand-lg navbar-light white scrolling-navbar">
       <div class="container">
         <!-- Brand -->
-        <a class="navbar-brand waves-effect" href="./index.html">
+        <a class="navbar-brand mr-4" href="./index.html">
           <strong>Denver Area<br>Freelancers</strong>
         </a>
         <!-- Collapse -->
@@ -51,19 +51,23 @@
           <!-- Left -->
           <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-              <a class="nav-link waves-effect" href="./index.html">
-                Home
+              <a class="nav-link" href="index.html">Home
               </a>
             </li>
             <li class="nav-item active">
-              <a class="nav-link waves-effect" href="./vision.html">
+              <a class="nav-link" href="vision.html">
                 Vision
                 <span class="sr-only">(current)</span>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link waves-effect" href="./resources.html">
+              <a class="nav-link" href="resources.html">
                 Resources
+               </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/directory">
+                Directory
                </a>
             </li>
             <li class="nav-item">
@@ -75,14 +79,14 @@
           <!-- Right -->
           <ul class="navbar-nav nav-flex-icons">
             <li class="nav-item">
-              <a class="nav-link waves-effect"
+              <a class="nav-link"
                  href="https://www.facebook.com/events/1064508467084854/"
                  target="_blank">
                 <i class="fab fa-2x fa-facebook-f"></i>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link waves-effect"
+              <a class="nav-link"
                  href="https://www.meetup.com/Colorado-Co-ops-Study-Circle/events/258363973/"
                  target="_blank">
                 <i class="fab fa-2x fa-meetup"></i>
@@ -97,32 +101,25 @@
   <!--Main layout-->
   <main class="mt-5 pt-5">
     <div class="container">
-      <div class="card m-3 p-3">
-        <!--Section: Jumbotron-->
-        <section class="wow fadeIn mt-5 img-fluid" id="intro"
-                 style="background-image: url(assets/img/ethan-weil-unsplash.jpg);">
-          <!-- Content -->
-          <div class="card-body text-black text-center py-5 px-5 my-4">
-            <h1 class="mb-4">
-              <strong>The #BetterTogetherDenver Vision</strong>
-            </h1>
-            <h3 class="d-none d-lg-block font-italic my-5">
-              <strong>A vision of an awesome future for independent workers in Denver</strong>
-            </h3>
-          </div><!-- .card-body -->
-        </section><!-- Jumbotron-->
+      <div class="card m-3">
+        <img class="card-img-top" src="assets/img/ethan-weil-unsplash.jpg" alt="Card image cap">
+        <section class="wow fadeIn m-2 card-img-overlay text-right" id="intro">
+          <p>
+            <strong>The #BetterTogetherDenver Vision</strong>
+          </p>
+        </section>
 
         <!--Section: Cards-->
-        <section class="pt-5">
+        <section class="pt-5 px-3">
           <!-- Article Heading -->
           <div class="row justify-content-center wow fadeIn">
             <div class="col-md-12 col-lg-11 col-xl-10 mb-4">
-              <h2 class="h1 text-center mb-4">
+              <h2 class="h1 mb-4">
                 <strong>
                   Let's build a powerful network of freelancers here in Denver!
                 </strong>
               </h2>
-              <p class="d-lg-none text-center font-italic my-2">
+              <p class="my-2">
                 <strong>A vision of an awesome future for independent workers in Denver</strong>
               </p>
              </div><!--.col-->
@@ -130,7 +127,7 @@
            <div class="row justify-content-center wow fadeIn">
              <div class="col-md-10 col-lg-9 col-xl-8 mb-4">
               <p>
-                By Drew Hornbein&nbsp;&mdash;&nbsp;
+                <em>By Drew Hornbein</em>&nbsp;&mdash;&nbsp;
                 read the
                 <a href="https://medium.com/@hornbein/lets-build-a-powerful-network-of-freelancers-here-in-denver-fde7d44a75f8"
                    target="_blank">
@@ -161,7 +158,7 @@
 
               <p>It came from humble beginnings which I believe have already begun.</p>
 
-              <h3 class="h2 text-center mb-4">Better Together</h3>
+              <h3 class="h2 mb-4">Better Together</h3>
 
               <p>
                 In summer 2018 myself and a couple friends (Katie and Paul) hosted an event called <u><em>Better Together: How Freelancers Can Win</em></u> at Denver Startup Week. Over 125 people attended and began to shed light on what workers in Denver want and need.
@@ -181,11 +178,19 @@
               <p>What I see now is a great opportunity in the growing freelancer community for us to come together and make immediate impactful change in our lives to bring us towards the vision above.
               </p>
 
-              <h3 class="h2 text-center mb-4">Purpose</h3>
+              <h3 class="h2 mb-4">Purpose</h3>
 
               <p>I believe that we can build an association of workers whose purpose is to improve the quality of life for independent workers and their communities. If anyone is going to be able to pull this off it's you, the independent worker. If we work together we can get better benefits, we can find and share gigs, we can support each other by coming together and sharing our wisdom, skills, and talents.</p>
 
               <p>Freelancing is the new normal. We are the next economy and I believe that together we can build a solidarity network which provides security, prosperity, purpose, and an outstanding quality of life for all.</p>
+
+              <p class="text-center">
+                <button type="button" class="btn btn-indigo">
+                  <a class="white-text" href="subscribe.html" role="button">
+                    <i class="fas fa-envelope"></i> Subscribe for updates
+                  </a>
+                </button>
+              </p>
             </div><!--.col-->
           </div><!-- .row -->
         </section>
