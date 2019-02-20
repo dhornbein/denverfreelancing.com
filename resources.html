@@ -68,6 +68,11 @@
               </a>
             </li>
             <li class="nav-item">
+              <a class="nav-link" href="/directory">
+                Directory
+               </a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link" href="subscribe.html">
                 Subscribe
                </a>
@@ -97,139 +102,140 @@
 
   <!--Main layout-->
   <main class="mt-5 pt-5">
-    <div class="container mt-5">
-      <section class="card wow fadeIn" id="mailing">
+    <div class="container">
+      <section class="" id="mailing">
 
         <!-- Heading and Introductory Paragraph -->
         <div class="row justify-content-center wow fadeIn">
           <div class="col-md-10 col-lg-9 col-xl-8">
-            <div class="card-body">
-              <h1 class="h1 text-center my-4">
-                <strong>
-                  Resources
-                </strong>
-              </h1>
-              <p class="lead m-3">
-                <strong>
-                 Check out these books, websites, promo codes, and tools recomended by other freelancers.
-                </strong>
-              </p>
-              <p class="note">
-                <em>
-                  * Some of the websites and books use affiliate links to help raise money,
-                   you can support this project by clicking the links!
-                  Also, content on this page is publically editable, if you see
-                   something amiss please
-                   <a href="mailto:hello@denverfreelancing.com">email us</a>.
-                </em>
-              </p>
-            </div><!-- .card-body -->
+            <h1 class="h1 text-center my-4">
+              <strong>
+                Resources
+              </strong>
+            </h1>
+            <p class="lead m-3">
+              <strong>
+               Check out these books, websites, promo codes, and tools recomended by other freelancers.
+              </strong>
+            </p>
+            <p class="note">
+              <em>
+                * Some of the websites and books use affiliate links to help raise money,
+                 you can support this project by clicking the links!
+                Also, content on this page is publically editable, if you see
+                 something amiss please
+                 <a href="mailto:hello@denverfreelancing.com">email us</a>.
+              </em>
+            </p>
           </div><!--.col-->
         </div><!-- .row -->
 
         <!-- Lists of Resources - Populated using JavaScript and Vue -->
-        <div class="row justify-content-center wow fadeIn">
-          <div id="main">
-            <div class="resources">
-              <h2 class="display-4 text-center font-weight-bold" id="books">📖 Books</h2>
-              <div class="row justify-content-around wow fadeIn">
-                <div class="books" v-if="books">
-                  <div class="book"
-                       :href="book.link"
-                       v-for="book in books">
-                    <div class="col-md-6 col-lg-4">
-                      <div class="card">
-                        <a :href="book.link" class="cover">
-                          <img :src="book.cover" :alt="book.title" v-if="book.cover">
-                        </a>
-                        <p>
-                          <strong>{{ book.title }}</strong>
-                        </p>
-                        <p class="desc">
-                          {{ book.description }}
-                          <br>
-                          <a :href="book.link" v-if="book.link">Buy on Amazon</a>
-                        </p>
-                      </div><!-- .card -->
-                    </div><!-- .col-* -->
-                  </div><!-- .book -->
-                </div><!-- .books -->
-                <p v-else>Loadings...</p>
-              </div><!-- .row -->
+        <div id="main">
+          <div class="resources">
+            <h2 class="display-4 text-center font-weight-bold" id="books">📖 Books</h2>
+            <div class="books row wow fadeIn" v-if="books">
+              <div class="book col-md-6 col-lg-4 mb-3"
+                   v-for="book in books">
+                <div class="card flex-fill">
+                  <div class="card-body">
+                    <a :href="book.link" class="cover float-right mb-2 ml-2">
+                      <img :src="book.cover" :alt="book.title" v-if="book.cover">
+                    </a>
+                    <p>
+                      <strong>{{ book.title }}</strong>
+                    </p>
+                    <p class="desc">
+                      {{ book.description }}
+                      <br>
+                    </p>
+                  </div>
+                  <div class="card-footer">
+                    <a :href="book.link" v-if="book.link">Buy on Amazon</a>
+                  </div>
+                </div><!-- .card -->
+              </div><!-- .book --><!-- .col-* -->
+            </div><!-- .books --><!-- .row -->
+            <p v-else>Loadings...</p>
 
-              <div class="callout">
+            <div class="card callout mb-3">
+              <div class="card-body">
                 <p>
                   <strong>Got more resources?</strong>
                   Resources on this page come from a public Google Spreadsheet, feel free to add or edit!
                 </p>
-                <p>
-                  <a :href="workbookEditURL" class="button">View Spreadsheet</a>
+                <p class="mb-0">
+                  <a :href="workbookEditURL" class="btn btn-primary ml-0">View Spreadsheet</a>
                 </p>
               </div>
+            </div>
 
-              <h2 class="display-4 text-center font-weight-bold" id="websites">💻 Websites</h2>
-              <ul class="websites" v-if="websites">
-                <li class="site"
-                    v-for="website in websites"
-                    v-bind:style="{ listStyleImage: 'url(' + website.icon + ')' }">
-                  <p>
-                    <a :href="website.link" target="_blank">{{ prettyLink( website.link ) }}</a>
-                    <br>
-                    {{ website.description }}
-                    <br>
-                    <small v-if="website.referralLink">[<a :href="website.referralLink">Referral Link</a>]</small>
-                  </p>
-                </li>
-              </ul>
-              <p v-else>Loadings...</p>
+            <h2 class="display-4 text-center font-weight-bold" id="websites">💻 Websites</h2>
+            <ul class="websites" v-if="websites">
+              <li class="site"
+                  v-for="website in websites"
+                  v-bind:style="{ listStyleImage: 'url(' + website.icon + ')' }">
+                <p>
+                  <a :href="website.link" target="_blank">{{ prettyLink( website.link ) }}</a>
+                  <br>
+                  {{ website.description }}
+                  <br>
+                  <small v-if="website.referralLink">[<a :href="website.referralLink">Referral Link</a>]</small>
+                </p>
+              </li>
+            </ul>
+            <p v-else>Loadings...</p>
 
-              <h2 class="display-4 text-center font-weight-bold" id="promos">💸 Promo Codes</h2>
-              <ul class="promos" v-if="promos">
-                <li class="promo" v-for="promo in promos">
-                  <h3 class="title">
-                    <a :href="promo.link" target="_blank">{{ promo.name }}</a>
-                  </h3>
-                  <p class="promocode">
-                    <input type="text" readonly onclick="select()" :value="promo.code">
-                  </p>
-                  <p>
-                    {{ promo.description }}
-                  </p>
-                </li>
-              </ul>
-              <p v-else>Loadings...</p>
-
-              <h2 class="display-4 text-center font-weight-bold" id="tools">🛠 Tools</h2>
-              <p class="filter">
-                <label for="filter">Filter Tools</label>
-                <input type="text" name="filter" value="" v-model="search">
-              </p>
-              <ul class="tools" v-if="tools">
-                <li class="site"
-                    v-for="tool in tools"
-                    v-bind:style="{ listStyleImage: 'url(' + tool.icon + ')' }"
-                    v-if="tool.link"
-                    v-show="tool.filtered()">
-                  <p>
-                    <a :href="tool.link" target="_blank"><strong>{{ tool.name }}</strong></a>
-                    –
-                    {{ tool.description }}
-                    <br>
-                    <small v-if="tool.referralLink">[<a :href="tool.referralLink">
-                      <template v-if="tool.referralText">{{ tool.referralText }}</template>
-                      <template v-else>Referral Link</template>
-                    </a>]</small>
-                  </p>
-                  <div class="tags" v-if="tool.tags">
-                    <span class="tag" v-for="tag in tool.tags">{{ tag }}</span>
+            <h2 class="display-4 text-center font-weight-bold" id="promos">💸 Promo Codes</h2>
+            <div class="promos row mb-3" v-if="promos">
+              <div class="promo  col-md-6 col-lg-4 mb-3" v-for="promo in promos">
+                <div class="card">
+                  <div class="card-body">
+                    <h4 class="title">
+                      <a :href="promo.link" target="_blank">{{ promo.name }}</a>
+                    </h4>
+                    <p class="promocode">
+                      <input type="text" class="form-control text-center" readonly onclick="select()" :value="promo.code">
+                    </p>
+                    <p>
+                      {{ promo.description }}
+                    </p>
                   </div>
-                </li>
-              </ul>
-              <p v-else>Loadings...</p>
+                </div>
+              </div>
+            </div>
+            <p v-else>Loadings...</p>
 
-            </div><!-- .resources -->
-          </div><!-- #main -->
-        </div><!-- .row -->
+            <h2 class="display-4 text-center font-weight-bold" id="tools">🛠 Tools</h2>
+            <p class="filter">
+              <label for="filter">Filter Tools</label>
+              <input type="text" class="form-control" name="filter" value="" v-model="search">
+            </p>
+            <ul class="tools" v-if="tools">
+              <li class="site mb-4"
+                  v-for="tool in tools"
+                  v-bind:style="{ listStyleImage: 'url(' + tool.icon + ')' }"
+                  v-if="tool.link"
+                  v-show="tool.filtered()">
+                <p class="mb-2">
+                  <a :href="tool.link" target="_blank"><strong>{{ tool.name }}</strong></a>
+                  –
+                  {{ tool.description }}
+                  <br>
+                  <small v-if="tool.referralLink">[<a :href="tool.referralLink">
+                    <template v-if="tool.referralText">{{ tool.referralText }}</template>
+                    <template v-else>Referral Link</template>
+                  </a>]</small>
+                </p>
+                <div class="tags" v-if="tool.tags">
+                  <span class="badge badge-light mr-2 font-weight-normal" v-for="tag in tool.tags">{{ tag }}</span>
+                </div>
+              </li>
+            </ul>
+            <p v-else>Loadings...</p>
+
+          </div><!-- .resources -->
+        </div><!-- #main -->
       </section>
 
     </div><!-- .container -->
