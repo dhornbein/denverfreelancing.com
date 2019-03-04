@@ -61,31 +61,6 @@ navbar:
       <div class="row wow fadeIn">
         <div class="col-md-6">
           <h2 class=" mb-3">
-            February Working Meetup
-          </h2>
-          <p class="lead">
-            <strong>When:</strong> Tuesday February 26th
-          </p>
-          <p class="lead">
-            <strong>Location:</strong> TBD
-          </p>
-          <p>
-            Come work on co-creating Better Together.
-            Share some food, fun, and learning.
-          </p>
-          <p class="lead">
-            If you want to join us, send an email!
-          </p>
-          <p class="">
-            <button type="button" class="btn btn-warning">
-              <a class="black-text"
-                 href="mailto:{{ site.email }}" role="button">
-                Email Us!</a>
-            </button>
-          </p>
-        </div><!-- .col-*-->
-        <div class="col-md-6">
-          <h2 class=" mb-3">
             March Networking and Community Building!
           </h2>
           <p class="lead">
