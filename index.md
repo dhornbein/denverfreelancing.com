@@ -61,7 +61,7 @@ navbar:
       <div class="row wow fadeIn">
         <div class="col-md-6">
           <h2 class=" mb-3">
-            March Networking and Community Building!
+            March Networking & Expert Panel!
           </h2>
           <p class="lead">
             <strong>When:</strong> Tuesday March 26th
@@ -74,8 +74,7 @@ navbar:
             1062 Delaware St. Denver CO 80204
           </p>
           <p>
-            We will gather at Galvanize, enjoy some tasty (free) food, connect
-             with each other, and foster a supportive and creative environment.
+            You spoke and we listened. We will be hosting a panel discussion with some Denver area freelancers.
           </p>
           <p class="lead">
             Use one of the buttons below to RSVP!
