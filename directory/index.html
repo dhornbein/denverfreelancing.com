@@ -48,8 +48,6 @@ permalink: /directory/
                   <template v-if="person.primarySite()">
                     <a :href="person.primarySite().url" target="_blank"><span class="icon"><i :class="person.primarySite().icon"></i></span> (( person.primarySite().label ))</a>
                   </template>
-                  <a :href="'mailto:' + person.email" v-if="person.email"><span class="icon"><i class="fas fa-envelope"></i></span> Email</a>
-                  <a :href="'tel:' + person.phone" v-if="person.phone"><span class="icon"><i class="fas fa-phone"></i></span> Call</a>
                 </div>
                 <p v-if="person.location"><label>Location</label><br> (( person.location ))</p>
                 <p v-if="person.cosmic"><label>Cosmic Task</label><br> (( person.cosmic ))</p>
