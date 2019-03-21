@@ -232,9 +232,7 @@ var app = new Vue({
      */
     people: function () {
       return this.gsxRowObject( this.workbook.sheets.directory , function (r,self) {
-            var firstname = self.gsxGetCol( r, 'name'),
-                lastname = self.gsxGetCol( r, 'lastname'),
-                fullname = (lastname) ? firstname + ' ' + lastname : firstname,
+            var fullname = self.gsxGetCol( r, 'name'),
                 skills = self.gsxGetCol( r, 'otherskills');
 
                 if ( null !== skills ) {
