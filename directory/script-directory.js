@@ -256,9 +256,7 @@ var app = new Vue({
               return false
             },
             name:     fullname,
-            email:    self.gsxGetCol( r, 'emailaddress'),
             location: self.gsxGetCol( r, 'location'),
-            phone:    self.gsxGetCol( r, 'publicphonenumber'),
             cosmic:   self.gsxGetCol( r, 'cosmictask'),
             trade:    self.gsxGetCol( r, 'primarytrade'),
             skills:   skills,
