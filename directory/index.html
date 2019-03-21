@@ -41,7 +41,7 @@ permalink: /directory/
             <div class="card-content">
               <div class="content">
                 <p class="title is-4">(( person.name ))</p>
-                <p class="subtitle is-6">
+                <p class="subtitle is-6 has-text-weight-bold">
                   (( person.trade ))
                 </p>
                 <div class="connect">
@@ -49,7 +49,7 @@ permalink: /directory/
                     <a :href="person.primarySite().url" target="_blank"><span class="icon"><i :class="person.primarySite().icon"></i></span> (( person.primarySite().label ))</a>
                   </template>
                 </div>
-                <p v-if="person.location"><label>Location</label><br> (( person.location ))</p>
+                <p class="person__location" v-if="person.location"><label>Location</label> (( person.location ))</p>
                 <p v-if="person.cosmic"><label>Cosmic Task</label><br> (( person.cosmic ))</p>
                 <template v-if="person.skills">
                   <p><label>Skills</label></p>

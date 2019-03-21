@@ -10,7 +10,29 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  position: relative;
 }
+
+.person .title {
+  text-transform:capitalize;
+}
+
+.person .subtitle:first-letter {
+  text-transform:capitalize;
+}
+
+.person__location {
+  position: absolute;
+  top: 0; right: 0;
+  color: #888;
+  font-weight: bold;
+  font-size: 0.7em;
+  margin: 0.5em;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.person__location label { display: none; }
 
 .connect {
   padding-bottom: .75rem;
