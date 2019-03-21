@@ -1,0 +1,31 @@
+.directory {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-gap: 1em;
+}
+
+.person {
+  border: 1px solid #eee;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.connect {
+  padding-bottom: .75rem;
+}
+
+.person:hover {
+  border-color: #00d1b2;
+}
+
+.person label {
+  font-weight: bold;
+  font-size: 0.7em;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.person .links .label {
+  display: none;
+}
