@@ -76,22 +76,11 @@ navbar:
           <p>
             You spoke and we listened. We will be hosting a panel discussion with some Denver area freelancers.
           </p>
-          <p class="lead">
-            Use one of the buttons below to RSVP!
-          </p>
           <p class="">
             <button type="button" class="btn btn-danger">
               <a class="white-text" role="button" target="_blank"
-                 href="https://www.meetup.com/Colorado-Co-ops-Study-Circle/events/258363973/">
-                <i class="fab fa-meetup"></i>
-                RSVP on Meetup
-              </a>
-            </button>
-            <button type="button" class="btn btn-primary">
-              <a class="white-text" role="button" target="_blank"
-                 href="https://www.facebook.com/events/1064508467084854/">
-                <i class="fab fa-facebook"></i>
-                RSVP on Facebook
+                 href="https://mailchi.mp/66ceecdfd965/better-together-jan-22nd-event-and-a-vision-for-325951">
+                Read the recap
               </a>
             </button>
           </p>

@@ -10,8 +10,8 @@ left:
     name: Resources
   - link: /subscribe/
     name: Subscribe
-right:
-  - link: https://www.facebook.com/events/1064508467084854/
-    icon: fab fa-2x fa-facebook-f
-  - link: https://www.meetup.com/Colorado-Co-ops-Study-Circle/events/258363973/
-    icon: fab fa-2x fa-meetup
+# right:
+#   - link: https://www.facebook.com/events/1064508467084854/
+#     icon: fab fa-2x fa-facebook-f
+#   - link: https://www.meetup.com/Colorado-Co-ops-Study-Circle/events/258363973/
+#     icon: fab fa-2x fa-meetup
