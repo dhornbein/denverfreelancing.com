@@ -337,6 +337,26 @@ var app = new Vue({
              });
 
       return out;
+    },
+    /**
+     * Filters skills into group that contains certain count
+     * @return {object} returns object with 2 values, top & others
+     *                  top contains skills with greater than min count
+     *                  others contains all other skills
+     */
+    filteredSkills: function () {
+      var out = {},
+          min = 4, // minimum occurences of tags
+          data = this.skillsSorted;
+
+      Object.keys(data).forEach(key => {
+        if ( data[key].count > min) {
+          out[key] = data[key];
+          delete data[key];
+        }
+      });
+
+      return { top: out, others: data };
     }
   },
 });
