@@ -3,14 +3,15 @@ title: Directory
 layout: directory
 permalink: /directory/
 ---
-    <section class="hero is-primary">
+    <section class="hero is-info is-bold">
       <div class="hero-body">
         <div class="container">
+          <a class="button is-warning is-pulled-right" href="/directory/join.html">List yourself</a>
           <h1 class="title">
             Freelancers Directory
           </h1>
           <h2 class="subtitle">
-            Welcome to a directory of Freelancers in the Denver area. If you would like to appear on this directory please fill out <a href="https://docs.google.com/forms/d/e/1FAIpQLScqYNJ6BBmYML2uZWs02i64KZdRmQg7kBkFRALHa5H3zs2ewA/viewform" target="_blank">this form</a>.
+            Welcome to a directory of Freelancers in the Denver area.
           </h2>
         </div>
       </div>
@@ -21,14 +22,30 @@ permalink: /directory/
 
     <section class="section">
       <div id="main" class="container is-fluid">
-        <p class="has-text-right">
-          <a class="button is-primary is-pulled-left" href="/directory/join.html">List yourself</a>
-          <button class="button" @click="filter.skills = {}" v-show="Object.keys(filter.skills).length > 0">Clear</button>
-          <button class="button" @click="showTags = ! showTags">(( (showTags) ? "Hide" : "Show" )) Tags</button>
+
+        <p class="title">
+          What are you looking for?
         </p>
+
+        <div class="field is-grouped is-grouped-multiline">
+          <div class="control" v-for="skill in filteredSkills.top">
+            <a class="tags has-addons" @click="toggleFilter('skills', skill )">
+              <div class="tag is-large" :class="{ 'is-primary': skill.slug in filter.skills }">(( skill.label ))</div>
+              <div class="tag is-info is-large" v-if="skill.count > 1">(( skill.count ))</div>
+            </a>
+          </div>
+        </div>
+
+
+        <p>
+          <button class="button" @click="showTags = ! showTags">(( (showTags) ? "Hide" : "Show" )) More Tags</button>
+          <button class="button" @click="filter.skills = {}" :disabled="Object.keys(filter.skills).length <= 0">Clear</button>
+        </p>
+
         <br>
-        <div class="field is-grouped is-grouped-multiline" v-if="showTags">
-          <div class="control" v-for="skill in skillsSorted">
+
+        <div class="field is-grouped is-grouped-multiline is-large" v-if="showTags">
+          <div class="control" v-for="skill in filteredSkills.others">
             <a class="tags has-addons" @click="toggleFilter('skills', skill )">
               <div class="tag" :class="{ 'is-primary': skill.slug in filter.skills }">(( skill.label ))</div>
               <div class="tag is-info" v-if="skill.count > 1">(( skill.count ))</div>
