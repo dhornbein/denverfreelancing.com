@@ -31,7 +31,7 @@ var app = new Vue({
       skills: {}
     },
     spreadsheet: [],
-    cacheLifttime: 48*60*60*1000, //hours*60*60*1000
+    cacheLifttime: 5*60*1000, //minutes*60*1000
   },
 
   /**
