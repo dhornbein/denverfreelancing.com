@@ -6,10 +6,16 @@ permalink: /directory/
     <section class="hero is-info is-bold">
       <div class="hero-body">
         <div class="container">
-          <a class="button is-warning is-pulled-right" href="/directory/join.html">List yourself</a>
           <h1 class="title">
             Freelancers Directory
           </h1>
+          <a class="button is-warning is-pulled-right" href="/directory/join.html">
+            <span class="icon is-small">
+              <i class="fas fa-plus"></i>
+            </span>
+            &nbsp;
+            List yourself
+          </a>
           <h2 class="subtitle">
             Welcome to a directory of Freelancers in the Denver area.
           </h2>
@@ -21,7 +27,15 @@ permalink: /directory/
     </section>
 
     <section class="section">
-      <div id="main" class="container is-fluid">
+      <div id="main" class="container is-fluid" v-if="loaded">
+
+        <a class="button is-link is-pulled-right" href="{{ site.links.openCollective }}" target="_blank">
+          <span class="icon is-small">
+            <i class="fas fa-dollar-sign"></i>
+          </span>
+          &nbsp;
+          Support
+        </a>
 
         <p class="title">
           What are you looking for?

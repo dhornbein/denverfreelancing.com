@@ -32,6 +32,7 @@ var app = new Vue({
     },
     spreadsheet: [],
     cacheLifttime: 5*60*1000, //minutes*60*1000
+    loaded: false
   },
 
   /**
@@ -48,10 +49,12 @@ var app = new Vue({
      * @return {[type]} [description]
      */
     getData: function () {
+      var fresh = new URL(window.location.href).searchParams.get('fresh')
+
       for ( var i in this.workbook.sheets ) {
         var index = this.workbook.sheets[i];
         // cache based on workbook id
-        if ( ! this.getCache( this.workbook.id, index )) {
+        if ( fresh || ! this.getCache( this.workbook.id, index )) {
           this.fetchData( this.workbook.id, index );
         }
       }
@@ -83,7 +86,8 @@ var app = new Vue({
      * @return none - uses vue's $set method to update data
      */
     putData: function ( data, index) {
-      this.$set(this.spreadsheet, index, JSON.parse( data ))
+      this.$set(this.spreadsheet, index, JSON.parse( data ));
+      this.loaded = true;
     },
     /**
      * Adds data to local storage cache
@@ -280,6 +284,11 @@ var app = new Vue({
                 url: self.sanitizeLink( self.gsxGetCol( r, 'twitter') ),
                 label: 'twitter',
                 icon: 'fab fa-twitter'
+              },
+              instagram:  {
+                url: self.sanitizeLink( self.gsxGetCol( r, 'instagram') ),
+                label: 'instagram',
+                icon: 'fab fa-instagram'
               },
               other:    {
                 url: self.sanitizeLink( self.gsxGetCol( r, 'other') ),
