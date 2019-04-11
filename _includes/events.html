@@ -1,0 +1,42 @@
+<section>
+  <h2 class="display-4 text-center font-weight-bold my-5">
+    <i class="fas fa-calendar-alt mb-3"></i>
+    <br>
+    Events
+  </h2>
+  <div class="row wow fadeIn">
+  {% for event in site.events %}
+  <div class="col-md-6">
+    <h2 class="mb-3">
+      {{ event.title }}
+    </h2>
+    <p class="lead">
+      <strong>When:</strong> {{ event.date | date: "%A, %B %e"}} {{ event.time.start }} to {{ event.time.end }}
+    </p>
+    <p class="lead">
+      <strong>Location:</strong> {{ event.location }}
+    </p>
+    <p>
+      {{ events.content | markdownify }}
+    </p>
+    <p class="">
+      {% for rsvp in event.rsvp %}
+        {% if rsvp[0] == 'facebook' %}
+          {% assign class = "btn-primary" %}
+        {% elsif rsvp[0] == 'meetup' %}
+          {% assign class = "btn-danger" %}
+        {% endif %}
+      <button type="button" class="btn {{ class }}">
+        <a class="white-text" role="button" target="_blank"
+           href="{{ rsvp[1] }}">
+           <i class="fab fa-{{ rsvp[0] }}"></i>
+          RSVP on {{ rsvp[0] | capitalize }}
+        </a>
+      </button>
+      {% endfor %}
+    </p>
+  </div><!-- .col-*-->
+  {% endfor %}
+
+  </div><!-- .row -->
+</section>

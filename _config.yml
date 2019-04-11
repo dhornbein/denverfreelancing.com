@@ -31,6 +31,9 @@ defaults:
       title: "Page"
       layout: "default"
 
+collections:
+  - events
+
 # Build settings
 markdown: kramdown
 theme: minima

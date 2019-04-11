@@ -1,5 +1,6 @@
 ---
 title: home
+layout: home
 navbar:
   dark: true
 ---
@@ -52,41 +53,7 @@ navbar:
 
     <!--Events -->
     <hr class="my-5">
-    <section>
-      <h2 class="display-4 text-center font-weight-bold my-5">
-        <i class="fas fa-calendar-alt mb-3"></i>
-        <br>
-        Events
-      </h2>
-      <div class="row wow fadeIn">
-        <div class="col-md-6">
-          <h2 class=" mb-3">
-            March Networking & Expert Panel!
-          </h2>
-          <p class="lead">
-            <strong>When:</strong> Tuesday March 26th
-          </p>
-          <p class="lead">
-            <strong>Location:</strong>
-            <a href="https://www.galvanize.com/denver-golden-triangle/campus">
-              Galvanize Golden Triangle
-            </a>
-            1062 Delaware St. Denver CO 80204
-          </p>
-          <p>
-            You spoke and we listened. We will be hosting a panel discussion with some Denver area freelancers.
-          </p>
-          <p class="">
-            <button type="button" class="btn btn-danger">
-              <a class="white-text" role="button" target="_blank"
-                 href="https://mailchi.mp/66ceecdfd965/better-together-jan-22nd-event-and-a-vision-for-325951">
-                Read the recap
-              </a>
-            </button>
-          </p>
-        </div><!-- .col-*-->
-      </div><!-- .row -->
-    </section>
+    {% include events.html %}
 
     <!-- Directory, Resources, and Email List -->
     <hr class="mb-5">
