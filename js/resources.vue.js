@@ -194,7 +194,7 @@ var app = new Vue({
       'LZZZZZZZ'
       ];
 
-      return 'http://images.amazon.com/images/P/' + this.amazonASIN( url ) + '.01.' + size[1] + '.jpg';
+      return 'https://images-na.ssl-images-amazon.com/images/P/' + this.amazonASIN( url ) + '.01.' + size[1] + '.jpg';
     },
     /**
      * Loops through Google Spreadsheet data and returns array of objects
