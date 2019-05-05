@@ -51,3 +51,43 @@ pull in partials (denoted by a leading underscore). Create new partials in the
 
 Create `_resources.scss` in `src/scss/` then add `@import "resources";` near the
 top of `src/scss/style.scss`.
+
+## Adding Events
+
+Events are markdown files in the events collection folder `/_events`.
+
+**Creating a new event:**
+
+- Duplicate existing event.
+- Change the name to reflect the event's date in the format `YYYY-MM-DD-event.md`
+- In the file make sure to adjust the "front header" between the `---` at the top.
+
+```
+title: "Build Great Freelance Relationships: A Panel Discussion Among Freelancers and Clients"
+date: 2019-05-29
+time:
+ start: 6:30 pm
+ end: 8:30 pm
+location: Galvanize Golden Triangle 1062 Delaware St. Denver CO 80204
+```
+*this is the minimum data required to display an event*
+
+- If the RSVP links have been created add them to between the `---` lines
+
+```
+rsvp:
+  facebook: https://www.facebook.com/events/828718720825476/
+  meetup: https://www.meetup.com/Colorado-Co-ops-Study-Circle/events/260527810/
+```
+*It is very important to use all lowercase platform name with no spaces or dashes*
+
+You can add the event description under as the body of the post in markdown format.
+
+**Updated a past event:**
+
+Once an event has passed simply add a link to the follow up email (or blog post)
+between the `---` lines.
+
+```
+followup: https://mailchi.mp/3ed9571c9d86/better-together-jan-22nd-event-and-a-vision-for-362255
+```
