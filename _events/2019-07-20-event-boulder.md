@@ -6,7 +6,7 @@ time:
  end: 12 noon
 location: Boulder Public Library - Main Library 1001 Arapahoe Ave · Boulder, CO
 rsvp:
-  meetup: https://www.meetup.com/Freelancer-are-better-together/events/263044705/
+  meetup: https://www.meetup.com/Freelancer-are-better-together/events/262783338/
 ---
 
 Connect with the Boulder Freelancer community. No matter what you do for work you are invited to meet your fellow workers.
