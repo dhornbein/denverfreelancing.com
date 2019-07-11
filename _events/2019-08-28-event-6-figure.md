@@ -1,5 +1,5 @@
 ---
-title: "Make your elevator pitch better, together!"
+title: "How to Negotiate a Six-Figure Freelancing Salary"
 date: 2019-08-28
 time:
  start: 6:30 pm
