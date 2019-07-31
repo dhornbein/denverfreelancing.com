@@ -7,6 +7,7 @@ time:
 location: Galvanize Golden Triangle 1062 Delaware St. Denver CO 80204
 rsvp:
   meetup: https://www.meetup.com/Freelancer-are-better-together/events/263050896/
+  facebook: https://www.facebook.com/events/2500089650029415/
 ---
 
 Are you having trouble making a living wage as a freelancer? Perhaps you need a bit of a mindset shift—and a little bit of process to back it up.
