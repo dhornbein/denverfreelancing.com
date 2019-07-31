@@ -24,13 +24,15 @@
       {{ events.content | markdownify }}
     </p>
     <p class="">
-      {% if event.followup %}
+      {% if date < now %}
+        {% if event.followup %}
         <button type="button" class="btn btn-secondary">
           <a class="white-text" role="button" target="_blank"
              href="{{ event.followup }}">
             Read Recap
           </a>
         </button>
+        {% endif %}
       {% else %}
         {% for rsvp in event.rsvp %}
           {% if rsvp[0] == 'facebook' %}
