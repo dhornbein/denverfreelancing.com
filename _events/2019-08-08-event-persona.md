@@ -8,6 +8,7 @@ location: Galvanize Platte - 1644 Platte St Denver, CO
 rsvp:
   meetup: https://www.meetup.com/Freelancer-are-better-together/events/263044705/
   facebook: https://www.facebook.com/events/653844275120353/
+followup: https://medium.com/@cmibanez1/ux-vs-marketing-personas-1231f758c782
 ---
 
 A persona is a representation of a user or buyer of your ideal target audience. Learn how personas are used both in product design and marketing campaigns and why they're so important for the success of both.
