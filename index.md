@@ -11,22 +11,15 @@ navbar:
   <div class="mask rgba-black-light d-flex justify-content-center align-items-center">
     <div class="text-center white-text mx-5 wow fadeIn">
       <h1 class="h1 mb-4">
-        <strong><u>Front Range Freelancers</u></strong>
+        <strong><u>Freelance Business Week is coming!</u></strong>
       </h1>
-      <h2 class="font-italic">
-        <strong>Are Better Together</strong>
-      </h2>
       <h5 class="my-4 d-none d-md-block">
         <strong>
-          If you are a freelancer in the Front Range area &mdash; or curious
-           about how cool it will be to strike out on your own &mdash;
-           get involved with us!
+          Hello Freelancers! Join your fellow freelancers for 5 days with over 50 speakers and 60+ sessions this September 30 - Oct 4th.
         </strong>
       </h5>
-      <a class="btn btn-white btn-lg mt-3" href="{{ '/vision' | relative_url }}">
-        <i class="fas fa-eye mr-3 d-none d-md-inline"></i>
-        Read Our Vision
-        <i class="fas fa-eye ml-3 d-none d-md-inline"></i>
+      <a class="btn btn-white btn-lg mt-3" href="https://freelancebusinessweek.com/denver/">
+        Learn More
       </a>
     </div>
   </div><!-- .mask -->

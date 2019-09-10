@@ -4,6 +4,7 @@
     <br>
     Events
   </h2>
+  <h2 class="display-4 text-center font-weight-bold mb-3"><a href="https://www.meetup.com/Freelancer-are-better-together/">Latest Events on Meetup.com</a></h2>
   {% capture now %}{{'now' | date: '%s' | plus: 0 %}}{% endcapture %}
   <div class="row wow fadeIn">
   {% assign events = (site.events | sort: 'date') | reverse %}
