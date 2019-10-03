@@ -1,6 +1,7 @@
 ---
 title: Vision
 permalink: /vision/
+redirect_to: "http://bettertogetherassociation.org/vision/"
 ---
   <!--Main layout-->
   <main class="mt-5 pt-5">

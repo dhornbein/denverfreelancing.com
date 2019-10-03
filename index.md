@@ -3,6 +3,7 @@ title: home
 layout: home
 navbar:
   dark: true
+redirect_to: "http://bettertogetherassociation.org"
 ---
 
 <!-- Above the fold -->
